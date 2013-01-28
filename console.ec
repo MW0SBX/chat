@@ -7,33 +7,25 @@
    console.ec - Console Dialog
 ****************************************************************************/
 import "ecere"
-import "mainpanel"
-import "HTMLView"
 
 #include <stdarg.h>
 
 class Console : Window
 {
-
    EditBox log
    {
       this,
       readOnly = true;
       multiLine = true;
       textHorzScroll = true;
-      textVertScroll = false;
+      textVertScroll = true;
       autoEmpty = true;
-      maxNumLines = 30;
-      borderStyle = none;
-      
+      maxNumLines = 256;
    };
    EditBox commandBox
    {
-      this, textHorzScroll = true; size.h = 56, anchor = { left = 0, right = 0, bottom = 0 };
-      
+      this, textHorzScroll = true; size.h = editHeight, anchor = { left = 0, right = 0, bottom = 0 };
    };
-
-  
    virtual bool ProcessCommand(char * command);
 
    Bitmap bitmap;
@@ -48,6 +40,7 @@ class Console : Window
    double lastTime;
    int currentAlpha;
    bool shown;
+
    int separatorHeight;
    int editHeight;
    int referenceHeight;
@@ -60,6 +53,7 @@ class Console : Window
    Color editBackColor;
    Color editTextColor;
    alpha = 255;
+
    Timer timer
    {
       this, delay = 0.05;
@@ -99,16 +93,15 @@ class Console : Window
                log.foreground = (logTextColor & 0xFFFFFF) | (currentAlpha << 24);
                if(alpha)
                {
-                  commandBox.foreground = (editTextColor & 0xFFFFFF) | ((currentAlpha * 255 / alpha) << 255);
+                  commandBox.foreground = (editTextColor & 0xFFFFFF) | ((currentAlpha * 255 / alpha) << 24);
                }
-               commandBox.background = (editBackColor & 0xFFFFFF) | (currentAlpha << 255);
+               commandBox.background = (editBackColor & 0xFFFFFF) | (currentAlpha << 24);
                lastTime = realTime;
             }
          }
          return true;
       }
    };
-
    bool OnCreate()
    {
       if(speed)
@@ -119,35 +112,32 @@ class Console : Window
       doneLooping = true;
       if(!referenceHeight)
          referenceHeight = 768;
-         
-      log.anchor = { left = 5, top = 10, right = 5, bottom =  editHeight + separatorHeight* 768 / referenceHeight };   
+
+      log.anchor = { left = 0, top = 0, right = 0, bottom = editHeight + separatorHeight* 768/referenceHeight };
       return true;
    }
 
-   bool OnPostCreate()       //main window
+   bool OnPostCreate()
    {
-      int editHeight;
-      commandBox.opacity = 0; 
-      log.opacity = 0;  
-
       if(referenceHeight)
       {
-          // h = height * 768 / referenceHeight;
-          
+         // h = height * 768 / referenceHeight;
+
          // Set up transparency color
          currentAlpha = (((int)pos + size.h) * alpha / size.h);
       }
       else
          referenceHeight = 768;
-       
-      editHeight = editHeight * 768 / referenceHeight;
+
+      if(editHeight)
+         commandBox.size.h = editHeight;
 
       log.background = 0;
 
-      log.foreground = (logTextColor & 0xFFFFFF) | (currentAlpha << 255);
+      log.foreground = (logTextColor & 0xFFFFFF) | (currentAlpha << 24);
       if(alpha)
-         commandBox.foreground = (editTextColor & 0xFFFFFF) | ((currentAlpha * 255 / alpha) << 255);
-      commandBox.background = (editBackColor & 0xFFFFFF) | (currentAlpha << 255);
+         commandBox.foreground = (editTextColor & 0xFFFFFF) | ((currentAlpha * 255 / alpha) << 24);
+      commandBox.background = (editBackColor & 0xFFFFFF) | (currentAlpha << 24);
       return true;
    }
 
@@ -196,7 +186,6 @@ class Console : Window
             Item string;
             char * lineBuffer;
             char * buffer;
-                     
 
             // Process Command in command edit box here
             lineBuffer = commandBox.line.text;
@@ -208,40 +197,19 @@ class Console : Window
                {
                   commands.Add(string);
                   buffer = (char *) ((byte *) string + sizeof(class Item));
-                  strcpy(buffer, lineBuffer);  
+                  strcpy(buffer, lineBuffer);
                   command = commands.first;
                   doneLooping = true;
                }
                log.End();
                if(log.numLines > 1 || log.line.count)
                   log.PutCh('\n');
-
-                 
-                      {
-  
-                File f = FileOpen("user_details.txt", read);
-                
-                if(f)
-                  {
-                     while(!f.eof)
-                   {
-                    char buffer[1024];
-                      if(f.GetLine(buffer, sizeof(buffer)))
-                       PrintLn(buffer);
-                      log.visible = false;
-                      log.PutS(buffer);
-               
-                  }
-                    }
-                     }          
-      
+               log.PutS(" > ");
                log.PutS(lineBuffer);
-               
                if(ProcessCommand)
                {
                   if(ProcessCommand(lineBuffer))
-                  commandBox.Clear();
-                   return false;        
+                     return false;
                }
                if(commandBox)
                   commandBox.Clear();
@@ -329,10 +297,8 @@ class Console : Window
          SetState(normal, true, 0);
          commandBox.Activate();
          lastTime = GetTime();
-         
       }
    }
-
 
    void Log(char * format, ...)
    {
@@ -348,6 +314,4 @@ class Console : Window
          va_end(args);
       }
    }
-
 };
- 

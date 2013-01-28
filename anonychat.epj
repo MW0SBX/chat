@@ -14,10 +14,12 @@
          "Name" : "Debug",
          "Options" : {
             "Debug" : true,
+            "MemoryGuard" : true,
             "Optimization" : "None",
             "PreprocessorDefinitions" : [
                "_DEBUG"
             ],
+            "Console" : true,
             "FastMath" : false
          }
       },
