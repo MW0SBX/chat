@@ -58,7 +58,7 @@ class Mainpanel : Window
          return true;
       }
 
-   HTMLView htmlview { console, this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 0, top = 0, right = 0, bottom = 60 } };
+   HTMLView htmlview { console, this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 0, top = 0, right = 0, bottom = 60 }, hasVertScroll = true };
    Console console
    {
       picture1, this, opacity = 0, editHeight = 56, drawBehind = true, size = { 493, 635 }, position = { 112, 72 }, editTextColor = white, font = { "Comic Sans MS", 10 }; 
@@ -100,6 +100,8 @@ class Mainpanel : Window
 
           mainpanel.htmlview.OnUnloadGraphics();   // This seems to be needed right now to properly load bitmaps
           mainpanel.htmlview.OnLoadGraphics();
+
+          mainpanel.htmlview.scroll.y = mainpanel.htmlview.scrollArea.h;
 
           if(c != command)
             delete c;
