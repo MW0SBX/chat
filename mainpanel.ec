@@ -16,34 +16,34 @@ TempFile chatFile { };
 
 Map<String, String> smileys
 { [
-   { ":)",      ":smiley1.png" },
-   { ";)",      ":smiley3.gif" },
-   { ":haha",   ":smiley19.gif"},
-   { ":dead",   ":smiley18.gif"},
-   { ":disgust",":smiley17.gif"},
-   { ":tired",  ":smiley16.gif"},
-   { ":cheeky", ":smiley15.gif"},
-   { ":cry",    ":smiley14.gif"},
-   { ":sick",   ":smiley13.gif"},
-   { ":$",      ":smiley12.gif"},
-   { ":cool",   ":smiley11.gif"},
-   { ":D",      ":smiley10.gif"},
-   { ":S",      ":smiley9.gif" },
-   { ":P",      ":smiley8.gif" },
-   { ":O",      ":smiley7.gif" },
-   { ":S",      ":smiley6.gif" },
-   { ":<",      ":smiley5.gif" },
-   { ":/",      ":smiley4.gif" },
-   { ";)",      ":smiley3.gif" },
-   { ":(",      ":smiley2.gif" },
-   { ":)",      ":smiley1.png" }
+   { ":)",       ":smiley1.png" },
+   { ";)",       ":smiley3.png" },
+   { ":haha",    ":smiley19.png"},
+   { ":dead",    ":smiley18.png"},
+   { ":disgust", ":smiley17.png"},
+   { ":tired",   ":smiley16.png"},
+   { ":cheeky",  ":smiley15.png"},
+   { ":cry",     ":smiley14.png"},
+   { ":sick",    ":smiley13.png"},
+   { ":$",       ":smiley12.png"},
+   { ":cool",    ":smiley11.png"},
+   { ":D",       ":smiley10.png"},
+   { ":S",       ":smiley9.png" },
+   { ":P",       ":smiley8.png" },
+   { ":O",       ":smiley7.png" },
+   { ":confused",":smiley6.png" },
+   { ":<",       ":smiley5.png" },
+   { ":/",       ":smiley4.png" },
+   { ";)",       ":smiley3.png" },
+   { ":(",       ":smiley2.png" },
+   { ":)",       ":smiley1.png" }
 ] };
 
 class Mainpanel : Window
 {
    caption = "Mainpanel";
    background = 0;
-   alphaBlend = true;
+//   alphaBlend = true;
    opacity = 0;
    interim = true;
    size = { 988, 734 };
@@ -87,9 +87,15 @@ class Mainpanel : Window
           }
 
           chatFile.Seek(0, end);
-          chatFile.PrintLn(c);
+          chatFile.Seek(0, end);
+          chatFile.PrintLn("<b>",changename.editBox.contents, "</b>: ");
+          chatFile.Puts(c);
           chatFile.PrintLn("<BR>");
           chatFile.Seek(0,start);
+
+          chatFile.Seek(0,start);
+      
+      
           mainpanel.htmlview.OpenFile(chatFile, null);
 
           mainpanel.htmlview.OnUnloadGraphics();   // This seems to be needed right now to properly load bitmaps
@@ -133,7 +139,7 @@ class Mainpanel : Window
    Button picture10 { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 696, 680 },toolTip = " :S ",        bitmap = { smileys[":S"] }; NotifyClicked = SmileyClicked };
    Button picture9  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 864, 656 },toolTip = " :P ",        bitmap = { smileys[":P"] }; NotifyClicked = SmileyClicked };
    Button picture8  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 840, 656 },toolTip = " :O ",        bitmap = { smileys[":O"] }; NotifyClicked = SmileyClicked };
-   Button picture7  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 816, 656 },toolTip = " :S ",        bitmap = { smileys[":S"] }; NotifyClicked = SmileyClicked };
+   Button picture7  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 816, 656 },toolTip = " :confused ", bitmap = { smileys[":confused"] }; NotifyClicked = SmileyClicked };
    Button picture6  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 792, 656 },toolTip = " :< ",        bitmap = { smileys[":<"] }; NotifyClicked = SmileyClicked };
    Button picture5  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 768, 656 },toolTip = " :/ ",        bitmap = { smileys[":/"] }; NotifyClicked = SmileyClicked };
    Button picture4  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 744, 656 },toolTip = " ;) ",        bitmap = { smileys[";)"] }; NotifyClicked = SmileyClicked };
@@ -143,7 +149,7 @@ class Mainpanel : Window
 
    Picture picture1
    {
-      this, caption = "picture1", opacity = 0, inactive = false, position = {  }, image = { ":chat-window20.png", alphaBlend = true };
+      this, caption = "picture1", opacity = 0, inactive = false, position = {  }, image = { ":chat-window21.pcx", alphaBlend = true };
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
