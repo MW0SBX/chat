@@ -149,7 +149,7 @@ class Mainpanel : Window
 
    Picture picture1
    {
-      this, caption = "picture1", opacity = 0, inactive = false, position = {  }, image = { ":chat-window21.pcx", alphaBlend = true };
+      this, caption = "picture1", opacity = 0, inactive = false, position = {  }, image = { ":chat-window21.png", alphaBlend = true };
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
