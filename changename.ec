@@ -12,6 +12,7 @@ class Changename : Window
    clientSize = { 400, 119 };
    position = { 150, 150 };
    moveable = true;
+   hasClose = true;
 
    Picture picture1 
    {
@@ -52,7 +53,7 @@ class Changename : Window
          return true;
       }
    }
-   EditBox editBox { this, caption = "default", size = { 184, 19 }, position = { 130, 40 } };
+   EditBox editBox { this, caption = "default", size = { 184, 19 }, position = { 130, 40 }, contents = "Anonymous" };
 }
 
 Changename changename { mainpanel, autoCreate = false };

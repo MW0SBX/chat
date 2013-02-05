@@ -5,17 +5,20 @@ import "HTMLView"
 import "lines"
 import "tables"
 
-class Help : Window
+
+class Info : Window
 {
-   caption = "Help";
+   caption = "info";
    background = black;
-   opacity = 0;
+   opacity = 1;
    drawBehind = false;
-   stayOnTop = true;
+   stayOnTop = true; 
    clientSize = { 400, 400 };
    position = { 150, 150 };
    moveable = true;
-   hasClose = true;
+   hasClose = true; 
+
+
 
    HTMLView htmlview { picture1, this, opacity = 1, visible = true, drawBehind = false, borderStyle = contour, size = { 390, 365 }, position = { 5, 10 }  };
    Picture picture1 
@@ -30,7 +33,7 @@ class Help : Window
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
-         if(x > 0 && x < 400 && y > 0 && y < 360) { help.MenuWindowMove(null, mods); }      
+         if(x > 0 && x < 400 && y > 0 && y < 360) { info.MenuWindowMove(null, mods); }      
    
 
          return true; 
@@ -39,14 +42,14 @@ class Help : Window
 
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
-            if(x > 132 && x < 146 && y > 380 && y < 396) {  help.Destroy(0);  }   
+            if(x > 132 && x < 146 && y > 380 && y < 396) {  info.Destroy(0);  }   
                             
          return true;
       }
 
       bool OnMouseMove(int x, int y, Modifiers mods)
       {
-         mainpanel.picture30.visible = false;
+       //  mainpanel.picture30.visible = false;
 
          return true;
       }
@@ -55,8 +58,8 @@ class Help : Window
 
    bool OnCreate(void)
    {
-      File f = FileOpen(":help.html", read); help.htmlview.OpenFile(f, null);
+      File f = FileOpen(":info.html", read); info.htmlview.OpenFile(f, null);
       return true;
    }
 };
-Help help { mainpanel, autoCreate = false };
+Info info { mainpanel, autoCreate = false };

@@ -12,6 +12,7 @@ class Enckey : Window
    clientSize = { 400, 120 };
    position = { 150, 150 };
    moveable = true;
+   hasClose = true;
 
    Picture picture1 
    {
@@ -19,7 +20,8 @@ class Enckey : Window
 
       bool NotifyActivate(Window window, bool active, Window previous)
       {
-
+         enckey.editBox1.contents = "0101010101000000011100100"; 
+         enckey.editBox2.contents = "0101010101000000011100100"; 
          return true;
       }
 
@@ -38,7 +40,7 @@ class Enckey : Window
       {
 
          if(x > 283 && x < 383 && y > 88 && y < 113) { File f = FileOpen("key1.txt", write); f.PrintLn(enckey.editBox1.contents); delete f;
-         
+      
          
          if(f)
          {
@@ -58,7 +60,7 @@ class Enckey : Window
             
          
          }
-
+         if(x > 283 && x < 383 && y > 88 && y < 113) {  enckey.Destroy(0); }
          if(x > 128 && x < 147 && y > 97 && y < 111) {  enckey.Destroy(0);  }   
 
          }
@@ -70,7 +72,7 @@ class Enckey : Window
          return true;
       }
    }
-   EditBox editBox1 { this, caption = "editBox1", size = { 254, 19 }, anchor = { horz = 55, vert = 6 }, scrollArea = { 264, 15 } };
-   EditBox editBox2 { this, caption = "editBox2", size = { 254, 19 }, anchor = { horz = 55, vert = -18 }, scrollArea = { 264, 15 } };
+   EditBox editBox1 { this, caption = "editBox1", size = { 254, 19 }, anchor = { horz = 55, vert = 6 }, scrollArea = { 264, 15 }, contents = "0101010101000000011100100"; };
+   EditBox editBox2 { this, caption = "editBox2", size = { 254, 19 }, anchor = { horz = 55, vert = -18 }, scrollArea = { 264, 15 }, contents = "0101010101000000011100100"; };
 };      
 Enckey enckey { mainpanel, autoCreate = false };   

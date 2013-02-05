@@ -5,19 +5,17 @@ import "HTMLView"
 import "lines"
 import "tables"
 
-class Help : Window
+class Surfer : Window
 {
-   caption = "Help";
+   caption = "Surfer";
    background = black;
    opacity = 0;
-   drawBehind = false;
-   stayOnTop = true;
-   clientSize = { 400, 400 };
+   clientSize = { 800, 600 };
    position = { 150, 150 };
    moveable = true;
    hasClose = true;
 
-   HTMLView htmlview { picture1, this, opacity = 1, visible = true, drawBehind = false, borderStyle = contour, size = { 390, 365 }, position = { 5, 10 }  };
+   HTMLView htmlview { picture1, this, opacity = 1, visible = true, drawBehind = false, borderStyle = contour, size = { 800, 600 }, position = { 5, 10 }  };
    Picture picture1 
    {
       this, caption = "mainframe", position = {  }, image = { ":help.gif" };
@@ -30,7 +28,7 @@ class Help : Window
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
-         if(x > 0 && x < 400 && y > 0 && y < 360) { help.MenuWindowMove(null, mods); }      
+         if(x > 0 && x < 400 && y > 0 && y < 360) { surfer.MenuWindowMove(null, mods); }      
    
 
          return true; 
@@ -39,7 +37,7 @@ class Help : Window
 
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
-            if(x > 132 && x < 146 && y > 380 && y < 396) {  help.Destroy(0);  }   
+            if(x > 132 && x < 146 && y > 380 && y < 396) {  surfer.Destroy(0);  }   
                             
          return true;
       }
@@ -55,8 +53,8 @@ class Help : Window
 
    bool OnCreate(void)
    {
-      File f = FileOpen(":help.html", read); help.htmlview.OpenFile(f, null);
+      File f = FileOpen(":help.html", read); surfer.htmlview.OpenFile(f, null);
       return true;
    }
 };
-Help help { mainpanel, autoCreate = false };
+Surfer surfer { autoCreate = false };

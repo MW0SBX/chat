@@ -3,14 +3,18 @@ import "console"       //typing
 import "about"         //about
 import "help"          //help
 import "Sounds"        //sounds
-import "IPPorts"       //IP Ports
+import "IPPorts"       //IP Ports not in use at moment
 import "enckey"        //encryption keys
 import "changename"    //change nickname
 import "UDP"           //ports
+import "info"          //program information
+import "sockets"       //Sockets tcp
+public import "surfer"        //p2pwebbrowser
 import "htmlParser"
 import "HTMLView"
 import "lines"
 import "tables"
+//import "server" 
 
 TempFile chatFile { };
 
@@ -39,18 +43,24 @@ Map<String, String> smileys
    { ":)",       ":smiley1.png" }
 ] };
 
+
+ class MyApp : GuiApplication
+ {
+    skin = "My";
+ }
+
 class Mainpanel : Window
 {
    caption = "Mainpanel";
-   background = 0;
-//   alphaBlend = true;
+   background = black;
    opacity = 0;
    interim = true;
    size = { 988, 734 };
    anchor = { horz = -188, vert = -11 };
    moveable = true;
-   nativeDecorations = false;
    
+   
+//   alphaBlend = true;
 
    bool OnKeyDown(Key key, unichar ch)
       {
@@ -58,12 +68,14 @@ class Mainpanel : Window
          return true;
       }
 
-   HTMLView htmlview { console, this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 0, top = 0, right = 0, bottom = 60 }, hasVertScroll = true };
+   HTMLView htmlview1 { picture1, this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 815, top = 59, right = 35, bottom = 410 }, hasVertScroll = true };
+   HTMLView htmlview2 { picture1, this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 815, top = 354, right = 35, bottom = 95 }, hasVertScroll = true };
+   HTMLView htmlview  { console,  this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 0, top = 0, right = 0, bottom = 60 }, hasVertScroll = true };
    Console console
    {
-      picture1, this, opacity = 0, editHeight = 56, drawBehind = true, size = { 493, 635 }, position = { 112, 72 }, editTextColor = white, font = { "Comic Sans MS", 10 }; 
-      log.visible = false;
- 
+      picture1, this, opacity = 0, editHeight = 56, drawBehind = true, size = { 490, 635 }, position = { 112, 72 }, editTextColor = white, font = { "Comic Sans MS", 10 }; 
+      log.visible = false;  
+      
        bool ProcessCommand(char * command)
        {
           String imgCode = "<img src=\"\">";
@@ -107,9 +119,8 @@ class Mainpanel : Window
             delete c;
          return false;
       }
-   }; 
-
-
+   };
+   Picture picture32 { picture1, this, "p2pweb",          position = { 35, 359  },  visible = false,  image = { ":p2pweb.png"          }; };
    Picture picture31 { picture1, this, "About_over",      position = { 35, 324  },  visible = false,  image = { ":about_over.png"      }; };
    Picture picture30 { picture1, this, "Help_over",       position = { 35, 289  },  visible = false,  image = { ":help_over.png"       }; };
    Picture picture29 { picture1, this, "Disconnect_over", position = { 35, 255  },  visible = false,  image = { ":disconnect_over.png" }; };
@@ -126,8 +137,7 @@ class Mainpanel : Window
    {
       console.commandBox.PutS(button.toolTip);
       return true;
-   } 
-
+   }
    Button picture20 { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 936, 680 },toolTip = " :haha ",     bitmap = { smileys[":haha"] }, NotifyClicked = SmileyClicked };
    Button picture19 { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 912, 680 },toolTip = " :dead  ",    bitmap = { smileys[":dead"] }; NotifyClicked = SmileyClicked };
    Button picture18 { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 888, 680 },toolTip = " :disgust ",  bitmap = { smileys[":disgust"] }; NotifyClicked = SmileyClicked };
@@ -148,10 +158,9 @@ class Mainpanel : Window
    Button picture3  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 720, 656 },toolTip = " :( ",        bitmap = { smileys[":("] }; NotifyClicked = SmileyClicked };
    Button picture2  { picture1, this, bevelOver = true, inactive = true,size = { 22, 22 }, opacity = 0,position = { 696, 656 },toolTip = " :) ",        bitmap = { smileys[":)"] }; NotifyClicked = SmileyClicked };
    ProgressBar progressBar1  { picture1, this, "progressBar1", inactive = true, opacity = 0, borderStyle = contour, size = { 585, 23 }, position = { 104, 42 };     };
-
    Picture picture1
    {
-      this, caption = "picture1", opacity = 0, inactive = false, position = {  }, image = { ":chat-window21.png", alphaBlend = true };
+      this, caption = "picture1", inactive = false, position = {  }, image = { "/users/microchip/anonychat/res/chat-window22.pcx", alphaBlend = true };
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
@@ -172,6 +181,9 @@ class Mainpanel : Window
          if(x > 0 && x < 988 && y > 0 && y < 736)     { mainpanel.picture29.visible = false; }   //Disconnect
          if(x > 0 && x < 988 && y > 0 && y < 736)     { mainpanel.picture30.visible = false; }   //Help           
          if(x > 0 && x < 988 && y > 0 && y < 736)     { mainpanel.picture31.visible = false; }   //About
+         if(x > 0 && x < 988 && y > 0 && y < 736)     { mainpanel.picture32.visible = false; }   //P2p-Browser 
+
+ 
 
          return true;
       }
@@ -180,14 +192,16 @@ class Mainpanel : Window
       {
             if(x > 956 && x < 986 && y > 48 && y < 58)   { mainpanel.Destroy(0); about.Destroy(0); help.Destroy(0); sounds.Destroy(0); ipports.Destroy(0); enckey.Destroy(0); changename.Destroy(0);}
             if(x > 956 && x < 986 && y > 60 && y < 80)   { mainpanel.picture1.MenuWindowMinimize(null,mods);  }
-            if(x > 34 && x < 100 && y > 79 && y < 103)   { changename.Create(); }    // nickname     34 - 100, 79  - 103  
-            if(x > 34 && x < 100 && y > 114 && y < 137)  { enckey.Create(); }        // Enc Key      34 - 100, 114 - 137            
-            if(x > 34 && x < 100 && y > 149 && y < 173)  { ipports.Create(); }       // IP Ports     34 - 100, 149 - 173  
-            if(x > 34 && x < 100 && y > 184 && y < 209)  { sounds.Create(); }        // sounds       34 - 100, 184 - 209                                                                                      
-            if(x > 34 && x < 100 && y > 219 && y < 243)  { }                         // connect      34 - 100, 219 - 243
-            if(x > 34 && x < 100 && y > 255 && y < 278)  { }                         // disconnect   34 - 100, 255 - 278
-            if(x > 34 && x < 100 && y > 289 && y < 313)  { help.Create(); }          // help         34 - 100, 289 - 313   
-            if(x > 34 && x < 100 && y > 324 && y < 348)  { about.Create(); }         // about        34 - 100, 324 - 348
+            if(x > 34 && x < 100 && y > 79 && y < 103)   { changename.Create(); }                     // nickname     34 - 100, 79  - 103  
+            if(x > 34 && x < 100 && y > 114 && y < 137)  { enckey.Create(); }                         // Enc Key      34 - 100, 114 - 137            
+            if(x > 34 && x < 100 && y > 149 && y < 173)  { mysocket.Create(); }                       //ipports.Create(); IP Ports     34 - 100, 149 - 173  
+            if(x > 34 && x < 100 && y > 184 && y < 209)  { sounds.Create(); }                         // sounds       34 - 100, 184 - 209                                                                                      
+            if(x > 34 && x < 100 && y > 219 && y < 243)  { File f = FileOpen(":dot.html", read); mainpanel.htmlview1.OpenFile(f, null); delete f; }  // connect      34 - 100, 219 - 243
+            if(x > 34 && x < 100 && y > 255 && y < 278)  { mysocket.Destroy(0); sckt1.Destroy(0); mainpanel.htmlview1.Destroy(0); }   // disconnect   34 - 100, 255 - 278
+            if(x > 34 && x < 100 && y > 289 && y < 313)  { help.Create(); }                           // help         34 - 100, 289 - 313   
+            if(x > 34 && x < 100 && y > 324 && y < 348)  { about.Create(); }                          // about        34 - 100, 324 - 348
+            if(x > 5  && x < 35  && y > 45  && y < 80)   { info.Create(); }                           // info         34 - 100, 324 - 348
+            if(x > 34 && x < 100 && y > 358 && y < 420)  { surfer.Create(); }                         // p2pwebbroswer   34 - 100, 324 - 348 
                             
             if(x > 615 && x < 658 && y > 673 && y < 700) { mainpanel.console.commandBox.Clear(); mainpanel.picture21.visible = true; } // clear message box   34 - 100, 324 - 348        
             if(x > 750 && x < 802 && y > 45 && y < 65)   { mainpanel.picture22.visible = true; } //file
@@ -199,23 +213,27 @@ class Mainpanel : Window
             if(x > 34 && x < 100 && y > 219 && y < 243)  { mainpanel.picture28.visible = true; } //Connect
             if(x > 34 && x < 100 && y > 255 && y < 278)  { mainpanel.picture29.visible = true; } //Disconnect
             if(x > 34 && x < 100 && y > 289 && y < 313)  { mainpanel.picture30.visible = true; } //Help
-            if(x > 34 && x < 100 && y > 324 && y < 348)  { mainpanel.picture31.visible = true; } //About  
+            if(x > 34 && x < 100 && y > 324 && y < 348)  { mainpanel.picture31.visible = true; } //About 
+            if(x > 34 && x < 100 && y > 358 && y < 420)  { mainpanel.picture32.visible = true; } //p2pwebbrowser
                    
             if(x > 0 && x < 518 && y > 700 && y < 750)   { about.Destroy(0); }
             if(x > 0 && x < 518 && y > 700 && y < 750)   { help.Destroy(0); } 
             if(x > 0 && x < 518 && y > 700 && y < 750)   { sounds.Destroy(0); }
             if(x > 0 && x < 518 && y > 700 && y < 750)   { ipports.Destroy(0); }
             if(x > 0 && x < 518 && y > 700 && y < 750)   { enckey.Destroy(0); }
-            if(x > 0 && x < 518 && y > 700 && y < 750)   { changename.Destroy(0); }   
-            
-            //smileys
-     //       if(x > 665 && x < 731 && y > 649 && y < 678) { chatFile.Seek(0,start); mainpanel.htmlview.OpenFile(chatFile, null); }           
+            if(x > 0 && x < 518 && y > 700 && y < 750)   { changename.Destroy(0); }
+            if(x > 0 && x < 518 && y > 700 && y < 750)   { info.Destroy(0); }   
+            if(x > 0 && x < 518 && y > 700 && y < 750)   { mysocket.Destroy(0); } 
+            if(x > 0 && x < 518 && y > 700 && y < 750)   { surfer.Destroy(0); }
 
+            //smileys
+         //   chatFile.Seek(0,start); mainpanel.helpView1.OpenFile(f, null);            
+          //  chatFile.Seek(0,start); mainpanel.helpView2.OpenFile(g, null); 
     
          return true;
       }
 
-         bool OnMouseMove(int x, int y, Modifiers mods)
+      bool OnMouseMove(int x, int y, Modifiers mods)
       {
              //clear button
             if(x > 659 && x < 695 && y > 651 && y < 708){ mainpanel.picture21.visible = false; }   //right 
@@ -282,13 +300,22 @@ class Mainpanel : Window
             if(x > 34 && x < 100 && y > 320 && y < 324) { mainpanel.picture31.visible = false; }   //top       
             if(x > 34 && x < 100 && y > 348 && y < 358) { mainpanel.picture31.visible = false; }   //bottom 
             if(x > 25 && x < 33 && y > 324 && y < 348)  { mainpanel.picture31.visible = false; }   //left           
+            
+            //p2pwebbrowser
+            if(x > 101 && x < 109 && y > 358 && y < 440){ mainpanel.picture32.visible = false; }   //right 
+            if(x > 34 && x < 100 && y > 350 && y < 358) { mainpanel.picture32.visible = false; }   //top       
+            if(x > 34 && x < 100 && y > 420 && y < 440) { mainpanel.picture32.visible = false; }   //bottom 
+            if(x > 25 && x < 33 && y > 358 && y < 440)  { mainpanel.picture32.visible = false; }   //left  
+             
                                    
          return true;
       }
    }
+
+
    Mainpanel()
-   {
-      chatFile.PrintLn("<BODY bgcolor=#00000000><FONT face\"Arial\" size=3 color=#FFFFFF>");
+   {  
+      chatFile.PrintLn("<BODY bgcolor=#00000000><b><FONT face\"Arial\" size=3 color=#000000>");
    }
 };
 Mainpanel mainpanel {};

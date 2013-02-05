@@ -11,6 +11,7 @@ class About : Window
    clientSize = { 400, 400 };
    position = { 150, 150 };
    moveable = true;
+   hasClose = true;
 
    Picture picture1 
    {

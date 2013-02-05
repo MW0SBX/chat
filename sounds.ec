@@ -1,6 +1,7 @@
 import "ecere"  
 import "mainpanel"
 
+
 class Sounds : Window
 {
    caption = "Sounds";
@@ -11,6 +12,7 @@ class Sounds : Window
    clientSize = { 400, 120 };
    position = { 150, 150 };
    moveable = true;
+   hasClose = true;
 
    Picture picture1 
    {

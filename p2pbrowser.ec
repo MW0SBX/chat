@@ -5,14 +5,12 @@ import "HTMLView"
 import "lines"
 import "tables"
 
-class Help : Window
+class P2pbrowser : Window
 {
-   caption = "Help";
+   caption = "P2pbrowser";
    background = black;
    opacity = 0;
-   drawBehind = false;
-   stayOnTop = true;
-   clientSize = { 400, 400 };
+   clientSize = { 1024, 768 };
    position = { 150, 150 };
    moveable = true;
    hasClose = true;
@@ -30,7 +28,7 @@ class Help : Window
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
-         if(x > 0 && x < 400 && y > 0 && y < 360) { help.MenuWindowMove(null, mods); }      
+         if(x > 0 && x < 400 && y > 0 && y < 360) { p2pbrowser.MenuWindowMove(null, mods); }      
    
 
          return true; 
@@ -39,7 +37,7 @@ class Help : Window
 
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
-            if(x > 132 && x < 146 && y > 380 && y < 396) {  help.Destroy(0);  }   
+            if(x > 132 && x < 146 && y > 380 && y < 396) {  p2pbrowser.Destroy(0);  }   
                             
          return true;
       }
@@ -55,8 +53,8 @@ class Help : Window
 
    bool OnCreate(void)
    {
-      File f = FileOpen(":help.html", read); help.htmlview.OpenFile(f, null);
+      File f = FileOpen(":p2pbrowser.html", read); p2pbrowser.htmlview.OpenFile(f, null);
       return true;
    }
 };
-Help help { mainpanel, autoCreate = false };
+P2pbrowser p2pbrowser { autoCreate = false };

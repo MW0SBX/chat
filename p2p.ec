@@ -5,9 +5,9 @@ import "HTMLView"
 import "lines"
 import "tables"
 
-class Help : Window
+class Ptwop : Window
 {
-   caption = "Help";
+   caption = "ptwop";
    background = black;
    opacity = 0;
    drawBehind = false;
@@ -30,7 +30,7 @@ class Help : Window
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
-         if(x > 0 && x < 400 && y > 0 && y < 360) { help.MenuWindowMove(null, mods); }      
+         if(x > 0 && x < 400 && y > 0 && y < 360) { ptwop.MenuWindowMove(null, mods); }      
    
 
          return true; 
@@ -39,7 +39,7 @@ class Help : Window
 
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
-            if(x > 132 && x < 146 && y > 380 && y < 396) {  help.Destroy(0);  }   
+            if(x > 132 && x < 146 && y > 380 && y < 396) {  ptwop.Destroy(0);  }   
                             
          return true;
       }
@@ -55,8 +55,8 @@ class Help : Window
 
    bool OnCreate(void)
    {
-      File f = FileOpen(":help.html", read); help.htmlview.OpenFile(f, null);
+      File f = FileOpen(":p2p.html", read); ptwop.htmlview.OpenFile(f, null);
       return true;
    }
 };
-Help help { mainpanel, autoCreate = false };
+Ptwop ptwop { mainpanel, autoCreate = false };
