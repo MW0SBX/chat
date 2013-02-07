@@ -7,12 +7,13 @@ class Enckey : Window
    caption = "Enckey";
    background = black;
    opacity = 0;
+   borderStyle = fixed;
+   hasClose = true;
    drawBehind = false;
    stayOnTop = true;
    clientSize = { 400, 120 };
    position = { 150, 150 };
    moveable = true;
-   hasClose = true;
 
    Picture picture1 
    {
@@ -74,5 +75,22 @@ class Enckey : Window
    }
    EditBox editBox1 { this, caption = "editBox1", size = { 254, 19 }, anchor = { horz = 55, vert = 6 }, scrollArea = { 264, 15 }, contents = "0101010101000000011100100"; };
    EditBox editBox2 { this, caption = "editBox2", size = { 254, 19 }, anchor = { horz = 55, vert = -18 }, scrollArea = { 264, 15 }, contents = "0101010101000000011100100"; };
+
+   bool OnCreate(void)
+   {
+ 
+        about.Destroy(0);     
+  //    enckey.Destroy(0);
+        help.Destroy(0);
+        sounds.Destroy(0);
+        changename.Destroy(0);
+        info.Destroy(0);
+        surfer.Destroy(0);
+        portssetup.Destroy(0);
+        online.Destroy(0);
+        offline.Destroy(0);
+       
+      return true;
+   }
 };      
 Enckey enckey { mainpanel, autoCreate = false };   

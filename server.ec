@@ -1,6 +1,5 @@
 import "ecere"
-
-/////////////////////////////////////////////////////////////////////
+import "mainpanel"
 
 typedef byte XDWord[4];
 typedef byte XWord[2];

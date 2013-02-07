@@ -1,9 +1,8 @@
 import "ecere"
 import "mainpanel"
 
- 
-// We'll use TCP/IP port 5623 for this sample
-define samplePort = 5623;
+// We'll use TCP/IP port 4000 for this sample
+define samplePort = 4000;
 
 // We will use this simple structure for our messages
 struct SamplePacket
@@ -67,18 +66,22 @@ class SampleSocket : Socket
       // This method will be called again once more data has been received.
       return 0;
    }
+}
 
- }
- class Mysocket : Window
+class Mysocket : Window
 {
-   text = "IPPorts";
-   opacity = 1; 
-   hasClose = true; 
-   size = { 416, 176 };
+   caption = "Mysocket";
    background = black;
+   foreground = white;
+   borderStyle = fixed;
+   hasClose = true;
+   size = { 416, 176 };
+   nativeDecorations = false;
+   
+   
 
-  
    // Service is missing a property to tell us if it's listening or not already, so we keep track of it in this variable
+
    bool listening;
 
    void UpdateButtonStates()
@@ -92,10 +95,10 @@ class SampleSocket : Socket
       // The Listen button is disabled if we're already listening
       btnListen.disabled = listening;
    }
-   
+
    Button btnSend 
-   {      
-      this, text = "Send", foreground = white, position = { 344, 64 }, disabled = true;
+   {
+      this, caption = "Send", foreground = white, position = { 344, 64 }, true;
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
@@ -114,10 +117,10 @@ class SampleSocket : Socket
       }
    };
    EditBox serverAddress { this, text = "Server Address", size = { 174, 19 }, position = { 8, 40 }, contents = "localhost" };
-   Label lblServerAddress { this, position = { 8, 16 }, foreground = white , labeledWindow = serverAddress };
+   Label lblServerAddress { this, background = black, foreground = white, position = { 8, 16 }, labeledWindow = serverAddress };
    Button btnListen 
-   {      
-      this, text = "Listen", foreground = white, position = { 144, 104 };
+   {
+      this, caption = "Listen", foreground = white, position = { 144, 104 };
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
@@ -130,13 +133,13 @@ class SampleSocket : Socket
          return true;
       }
    };
-   EditBox sentString { this, text = "Sent String", size = { 166, 19 }, position = { 224, 40 } };
-   Label lblSentString { this, position = { 224, 16 }, foreground = white, labeledWindow = sentString };
-   EditBox recvString { this, text = "Received String", size = { 166, 19 }, position = { 224, 104 } };
-   Label label1 { this, position = { 224, 80 }, foreground = white, labeledWindow = recvString };
+   EditBox sentString { this, caption = "Sent String", size = { 166, 19 }, position = { 224, 40 }, contents = "00000111" };
+   Label lblSentString { this, background = black, foreground = white, position = { 224, 16 }, labeledWindow = sentString };
+   EditBox recvString { this, caption = "Received String", size = { 166, 19 }, position = { 224, 104 }, contents = "11100000" };
+   Label label1 { this, background = black, foreground = white, position = { 224, 80 }, labeledWindow = recvString };
    Button btnConnect 
-   {      
-      this, text = "Connect", foreground = white, position = { 8, 72 };
+   {
+      this, caption = "Connect", foreground = white, position = { 8, 72 };
 
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
@@ -152,23 +155,15 @@ class SampleSocket : Socket
    void OnDestroy()
    {
       // We need to disconnect the socket and stop the service before destroying the application,
-      // otherwise we'll get a crash with the SampleSocket accessing the mysocket that is already destroyed
+      // otherwise we'll get a crash with the SampleSocket accessing the form that is already destroyed
       if(connectedSocket)
          connectedSocket.Disconnect(0);
       service.Stop();
    }
+}
 
-    bool OnMouseMove(int x, int y, Modifiers mods)
-      {
-         mainpanel.picture26.visible = false;
-
-         return true;
-      }            
-
-} 
-
-// The mysocket
-Mysocket mysocket {mainpanel.picture1, autoCreate = false };
+// The form
+Mysocket mysocket {mainpanel, autoCreate = false };
 
 // The service
 SampleService service { port = samplePort };

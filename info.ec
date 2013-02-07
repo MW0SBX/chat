@@ -59,6 +59,18 @@ class Info : Window
    bool OnCreate(void)
    {
       File f = FileOpen(":info.html", read); info.htmlview.OpenFile(f, null);
+      
+        about.Destroy(0);     
+        enckey.Destroy(0);
+        help.Destroy(0);
+        sounds.Destroy(0);
+        changename.Destroy(0);
+  //    info.Destroy(0);
+        surfer.Destroy(0);
+        portssetup.Destroy(0);
+        online.Destroy(0);
+        offline.Destroy(0);
+
       return true;
    }
 };
