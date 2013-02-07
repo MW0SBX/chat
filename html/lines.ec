@@ -64,15 +64,15 @@ int ComputeLine(Surface surface, Block startBlock, int startTextPos, Block * nex
    int width = 0, height = 0;
 
    int centeredBefore = *centered;
-
+                  
    if(changeLine)
-      *changeLine = true;
+      *changeLine = true;                                            
 
    *nextBlock = block;
    *nextTextPos = textPos;
 
    for(;!lineComplete && block;)
-   {
+   {                                                                 
       if(computeStartY && startTextPos == 0)
       {
          block.startX = x + sx;
