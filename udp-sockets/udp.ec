@@ -16,7 +16,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -27,7 +27,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -38,7 +38,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -49,7 +49,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+
    }
    
 }
@@ -60,7 +60,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 } 
@@ -71,7 +71,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -82,7 +82,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+
    }
    
 }
@@ -93,7 +93,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+
    }
    
 }
@@ -104,7 +104,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -115,7 +115,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -127,7 +127,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -138,7 +138,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -149,7 +149,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
@@ -160,7 +160,7 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+
    }
    
 }
@@ -171,38 +171,12 @@ class MySocket : Socket
 {
    void OnConnect()
    {
- //     printf("Connected!\n");
+ 
    }
    
 }
 
 MySocket socket16 { };            
-
-class UDP1 : GuiApplication
-{
-   bool Init()
-   {
-      socket1.DatagramHost(50001);  //incomming
-      socket2.DatagramHost(50002);
-      socket3.DatagramHost(50003);
-      socket4.DatagramHost(50004);
-      socket5.DatagramHost(50005);
-      socket6.DatagramHost(50006);
-      socket7.DatagramHost(50007);
-      socket8.DatagramHost(50008);
-     
-      socket9.DatagramHost(60001);   //outgoing 
-      socket10.DatagramHost(60002);  
-      socket11.DatagramHost(60003);
-      socket12.DatagramHost(60004);
-      socket13.DatagramHost(60005);
-      socket14.DatagramHost(60006);
-      socket15.DatagramHost(60007);
-      socket16.DatagramHost(65008);
-        
-      return true;
-   }
-}
 
 class Sckt1 : Window
 {

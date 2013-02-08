@@ -1,26 +1,18 @@
 import "ecere"  
 import "mainpanel"
-import "htmlParser"
-import "HTMLView"
-import "lines"
-import "tables"
-
 
 class Info : Window
 {
    caption = "info";
    background = black;
-   opacity = 1;
    drawBehind = false;
-   stayOnTop = true; 
+   stayOnTop = true;   
    clientSize = { 400, 400 };
    position = { 150, 150 };
    moveable = true;
    hasClose = true; 
 
-
-
-   HTMLView htmlview { picture1, this, opacity = 1, visible = true, drawBehind = false, borderStyle = contour, size = { 390, 365 }, position = { 5, 10 }  };
+   HTMLView infoview { picture1, this, opacity = 0, visible = true, drawBehind = false, borderStyle = none, size = { 390, 365 }, position = { 5, 10 }  };
    Picture picture1 
    {
       this, caption = "mainframe", position = {  }, image = { ":help.gif" };
@@ -38,7 +30,7 @@ class Info : Window
 
          return true; 
 
-      };
+      }
 
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
@@ -46,32 +38,23 @@ class Info : Window
                             
          return true;
       }
-
-      bool OnMouseMove(int x, int y, Modifiers mods)
-      {
-       //  mainpanel.picture30.visible = false;
-
-         return true;
-      }
       
-   }
+   }  
 
    bool OnCreate(void)
    {
-      File f = FileOpen(":info.html", read); info.htmlview.OpenFile(f, null);
-      
-        about.Destroy(0);     
+      File f = FileOpen(":info.html", read); info.infoview.OpenFile(f, null); 
+      delete f;
+
+        about.Destroy(0);
         enckey.Destroy(0);
         help.Destroy(0);
         sounds.Destroy(0);
         changename.Destroy(0);
-  //    info.Destroy(0);
         surfer.Destroy(0);
-        portssetup.Destroy(0);
-        online.Destroy(0);
-        offline.Destroy(0);
+        portssetup.Destroy(0);  
 
       return true;
    }
 };
-Info info { mainpanel, autoCreate = false };
+Info info { mainpanel, autoCreate = false; };

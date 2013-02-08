@@ -6,13 +6,11 @@ class Sounds : Window
 {
    caption = "Sounds";
    background = black;
-   opacity = 0;
    borderStyle = fixed;
    hasClose = true;
-   drawBehind = false;
    stayOnTop = true;
    clientSize = { 400, 120 };
-   position = { 150, 150 };
+   position = { 155, 140 };
    moveable = true;
 
    Picture picture1 
@@ -51,18 +49,15 @@ class Sounds : Window
       bool OnCreate(void)
       {
 
-        about.Destroy(0);     
+        about.Destroy(0);
         enckey.Destroy(0);
         help.Destroy(0);
-  //    sounds.Destroy(0);
         changename.Destroy(0);
-        info.Destroy(0);
         surfer.Destroy(0);
-        portssetup.Destroy(0);
-        online.Destroy(0);
-        offline.Destroy(0);
+        portssetup.Destroy(0);  
+        info.Destroy(0);
 
-         return true;
+         return Picture::OnCreate();
       }
    }
 };

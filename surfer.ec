@@ -1,71 +1,37 @@
 import "ecere"  
-//import "mainpanel"
-import "htmlParser"
-import "HTMLView"
-import "lines"
-import "tables"
+import "mainpanel"
 
 class Surfer : Window
 {
-   caption = "Surfer";
-   background = black;
-   borderStyle = fixed;
+   caption = "Internet p2p";
    hasClose = true;
-   clientSize = { 970, 734 };
-   position = {  };
+   clientSize = { 986, 690 };
    moveable = true;
 
-   HTMLView htmlviewer { picture1, this, opacity = 0, visible = true, drawBehind = false, borderStyle = contour, size = { 970, 734  }, position = { 5, 10 }  };
+   HTMLView surfview1 { this, opacity = 0, visible = true, drawBehind = false, borderStyle = none, size = { 984, 688 }, position = { 2, 2 }  };
    Picture picture1 
    {
-      this, caption = "mainframe", position = {  };  
+      this, caption = "mainframe", position = {  }, image = { "" };
 
       bool NotifyActivate(Window window, bool active, Window previous)
       {
-         
+         mainpanel.picture32.visible = false;
          return true;
       }
-
-      bool OnLeftButtonDown(int x, int y, Modifiers mods)
-      {
-         if(x > 0 && x < 970 && y > 0 && y < 734) { surfer.MenuWindowMove(null, mods); }      
-   
-           mainpanel.picture32.visible = false;
-         return true; 
-
-      };
-
-      bool OnLeftButtonUp(int x, int y, Modifiers mods)
-      {
-        
-        mainpanel.picture32.visible = false;                   
-         return true;
-      }
-
-      bool OnMouseMove(int x, int y, Modifiers mods)
-      {
-      
-         return true;
-      }
-      
    }
 
    bool OnCreate(void)
    {
+      File f = FileOpen(":help.html", read); surfview1.OpenFile(f, null);
+      //delete f;
+      
+      return true;
+   }
 
-
-        about.Destroy(0);     
-        enckey.Destroy(0);
-        help.Destroy(0);
-        sounds.Destroy(0);
-        changename.Destroy(0);
-        info.Destroy(0);
-//      surfer.Destroy(0);
-        portssetup.Destroy(0);
-        online.Destroy(0);
-        offline.Destroy(0);
-
+   bool OnClose(bool parentClosing)
+   {
+      mainpanel.picture32.visible = false;
       return true;
    }
 };
-Surfer surfer {autoCreate = false };
+Surfer surfer { autoCreate = false; };

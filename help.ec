@@ -1,23 +1,20 @@
 import "ecere"  
 import "mainpanel"
-import "htmlParser"
-import "HTMLView"
-import "lines"
-import "tables"
+
 
 class Help : Window
 {
    caption = "Help";
    background = black;
-   opacity = 0;
- //  drawBehind = false;
- //  stayOnTop = true;
+   opacity = 1;
+   drawBehind = false;
+   stayOnTop = true;  
    clientSize = { 400, 400 };
-   position = { 150, 150 };
+   position = { 155, 140 };
    moveable = true;
-   hasClose = true;
+   hasClose = true; 
 
-   HTMLView htmlview4 { picture1, this, opacity = 1, visible = true, drawBehind = false, borderStyle = contour, size = { 390, 365 }, position = { 5, 10 }  };
+   HTMLView helpview1 { picture1, this, opacity = 1, visible = true, drawBehind = false, borderStyle = contour, size = { 390, 365 }, position = { 5, 10 }  };
    Picture picture1 
    {
       this, caption = "mainframe", position = {  }, image = { ":help.gif" };
@@ -55,19 +52,16 @@ class Help : Window
 
    bool OnCreate(void)
    {
-      File f = FileOpen(":help.html", read); help.htmlview4.OpenFile(f, null);
+      File f = FileOpen(":help.html", read); help.helpview1.OpenFile(f, null);
       delete f;
 
-        about.Destroy(0);     
+        about.Destroy(0);
         enckey.Destroy(0);
- //     help.Destroy(0);
         sounds.Destroy(0);
         changename.Destroy(0);
-        info.Destroy(0);
         surfer.Destroy(0);
-        portssetup.Destroy(0);
-        online.Destroy(0);
-        offline.Destroy(0);
+        portssetup.Destroy(0);  
+        info.Destroy(0);
 
       return true;
    }
