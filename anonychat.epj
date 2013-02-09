@@ -51,7 +51,8 @@
       "ports-setup.ec",
       "online.ec",
       "offline.ec",
-      "sockets.ec"
+      "sockets.ec",
+      "sockets2.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [
