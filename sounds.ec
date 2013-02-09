@@ -61,4 +61,4 @@ class Sounds : Window
       }
    }
 };
-Sounds sounds { mainpanel,  autoCreate = false };
+Sounds sounds { mainpanel,  autoCreate = false; };

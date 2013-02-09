@@ -68,4 +68,4 @@ class Changename : Window
       return true;
    }
 }
-Changename changename { mainpanel, autoCreate = false };
+Changename changename { mainpanel, autoCreate = false; };

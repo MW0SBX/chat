@@ -178,14 +178,13 @@ class MySocket : Socket
 
 MySocket socket16 { };            
 
-class Sckt1 : Window
+ class Sckt1 : Window
 {
    caption = "";
    background = black;
    borderStyle = fixed;
    size = { 66, 29 };
-   visible = false;
-
+   visible = false;  
   
 }
 Sckt1 sckt1 {  }; 

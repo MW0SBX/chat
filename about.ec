@@ -60,4 +60,4 @@ class About : Window
       }
    }
 };
-About about { mainpanel, autoCreate = false };
+About about { mainpanel, autoCreate = false; };

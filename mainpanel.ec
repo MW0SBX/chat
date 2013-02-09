@@ -13,6 +13,7 @@ import "HTMLView"
 import "lines"
 import "tables"
 import "udp"
+import "sockets"
 import "online"        
 import "offline"  
 
@@ -43,6 +44,8 @@ Map<String, String> smileys
    { ":)", ":smiley1.png" }
 ] };
 
+
+  // Socket::Send()
 
  class MyApp : GuiApplication
  {

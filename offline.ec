@@ -1,6 +1,7 @@
 import "ecere"  
 import "mainpanel"
 import "ports-setup"
+import "sockets"
 
 class Offline : Window
 {
@@ -23,9 +24,34 @@ class Offline : Window
 
        online.Destroy(0);
        offline.Destroy(0);
-
+       
       return true;
    }
 
+   bool OnClose(bool parentClosing)
+   {
+    
+      service.Stop();
+      service2.Stop();
+     
+      delete socket1;
+      delete socket2;
+      delete socket3;
+      delete socket4;
+      delete socket5;
+      delete socket6;
+      delete socket7;
+      delete socket8;
+      delete socket9;
+      delete socket10;
+      delete socket11;
+      delete socket12;
+      delete socket13;
+      delete socket14;
+      delete socket15;
+      delete socket16; 
+
+      return true;
+   }
 };
-Offline offline { mainpanel,  autoCreate = false };
+Offline offline { mainpanel,  autoCreate = false; };

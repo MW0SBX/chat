@@ -66,4 +66,4 @@ class Help : Window
       return true;
    }
 };
-Help help { mainpanel, autoCreate = false };
+Help help { mainpanel, autoCreate = false; };

@@ -3,7 +3,7 @@ import "mainpanel"
 import "ports-setup"
 
 class Online : Window
-{
+{  
    caption = "Online";
    background = 0;
    opacity = 0;
@@ -21,6 +21,6 @@ class Online : Window
       offline.Destroy(0);
         
       return true;
-   }
+   }  
 };
-Online online { mainpanel,  autoCreate = false };
+Online online { mainpanel,  autoCreate = false; };

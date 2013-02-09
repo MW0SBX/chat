@@ -87,4 +87,4 @@ class Enckey : Window
       return true;
    }
 };      
-Enckey enckey { mainpanel, autoCreate = false };   
+Enckey enckey { mainpanel, autoCreate = false; };   

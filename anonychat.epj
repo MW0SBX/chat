@@ -50,7 +50,8 @@
       "udp-sockets/udp.ec",
       "ports-setup.ec",
       "online.ec",
-      "offline.ec"
+      "offline.ec",
+      "sockets.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [

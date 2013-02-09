@@ -1,7 +1,8 @@
 import "ecere"  
 import "mainpanel"
 import "udp"
-//import "sockets"
+import "sockets"
+import "sockets2"
 
 class Portssetup : Window
 {
@@ -52,7 +53,12 @@ class Portssetup : Window
    
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  
-       
+  
+   service.Start();
+   service2.Start();
+  // mysocket1.listening = true; 
+   //mysocket2.listening = true;
+   
    portssetup.Destroy(0);
 
          }
@@ -107,18 +113,21 @@ class Portssetup : Window
    
    Label label1 { this, caption = "Note! do not change this unless you want to make unique chat clients", foreground = white, background = black, position = { 10, 10  } };
    Label label2 { this, caption = "Recieve String", foreground = white, background = black, position = { 20, 235 } };
-   Label label3 { this, caption = "TCP Ports", foreground = white, background = black, position = { 150, 65 } };
+   Label label3 { this, caption = "TCP Ports", foreground = white, background = black, position = { 150, 67 } };
    Label label4 { this, caption = "Recieve (RX)", foreground = white, background = black, position = { 150, 85 } };
    Label label5 { this, caption = "Transmit (TX)", background = black, foreground = white, position = { 280, 85 } };
    Label label6 { this, caption = "UDP Ports", foreground = white, background = black, position = { 150, 140 } };
    Label label7 { this, caption = "Recieve (RX)", foreground = white, background = black, position = { 150, 160 } };
    Label label8 { this, caption = "Transmit (TX)", foreground = white, background = black, position = { 280, 160 } };
    Label label9 { this, caption = "Send String", foreground = white, background = black, position = { 20, 185 } };
+
+   EditBox serverAddress { this, text = "Server Address", size = { 120, 20 }, position = { 150, 40 }, contents = "localhost" };
+   Label lblServerAddress { this, background = black, foreground = white, position = { 150, 25 }, labeledWindow = serverAddress };
   
-   EditBox editBox1  { this, caption = "editBox1",  contents = "40000", position = { 150, 100 } };
-   EditBox editBox2  { this, caption = "editBox2",  contents = "40001", position = { 280, 100 } };
-   EditBox editBox3  { this, caption = "editBox3",  contents = "00000111", position = { 20,  200 } };
-   EditBox editBox4  { this, caption = "editBox4",  contents = "11100000", position = { 20,  250 } };
+   EditBox editBox1  { this, caption = "editBox1",  contents = "40001", position = { 150, 100 } };
+   EditBox editBox2  { this, caption = "editBox2",  contents = "40002", position = { 280, 100 } };
+   EditBox sentString  { this, caption = "Sent String",  contents = "00000111", position = { 20,  200 } };
+   EditBox recvString  { this, caption = "Received String",  contents = "11100000", position = { 20,  250 } };
    EditBox editBox5  { this, caption = "editBox5",  contents = "50001", position = { 150, 175 } };
    EditBox editBox6  { this, caption = "editBox6",  contents = "50002", position = { 150, 200 } };
    EditBox editBox7  { this, caption = "editBox7",  contents = "50003", position = { 150, 225 } };
@@ -152,4 +161,4 @@ class Portssetup : Window
       return true;
    }
 };
-Portssetup portssetup { mainpanel, autoCreate = false };
+Portssetup portssetup { mainpanel, autoCreate = false; };
