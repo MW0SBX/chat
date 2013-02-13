@@ -132,14 +132,14 @@ class Portssetup : Window
          mysocket.listening = true;
                      
           
-         String string = portssetup.sentString.contents;
+   /*      String string = portssetup.sentString.contents;
          int len = strlen(string);
          int size = sizeof(SamplePacket) + len;
          SamplePacket * packet = (SamplePacket *)new byte[size];
          packet->stringLen = len;
          memcpy(packet->string, string, len+1);
          (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);
-         delete packet;
+         delete packet;        */
 
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  

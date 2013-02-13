@@ -32,7 +32,6 @@ class Offline : Window
    {
     
       service.Stop();
-      service2.Stop();
       tcpServer.Stop();
    
       delete socket1; socket1 = { };
