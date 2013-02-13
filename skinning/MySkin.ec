@@ -358,7 +358,7 @@ static char * skinBitmaps[SkinBitmap] =
 public class MySkin : Skin
 {
    class_property(name) = "My";
-   class_property(selectionColor) = Color { 10, 36, 106 };
+   class_property(selectionColor) = Color { 255, 0, 0 };
 
    FontResource ::SystemFont()
    {

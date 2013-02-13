@@ -2,7 +2,7 @@ import "ecere"
 import "mainpanel"
 import "ports-setup"
 
-define samplePort = 40001;
+define samplePort = (atoi(portssetup.editBox1.contents));
 
 struct SamplePacket
 {
@@ -33,7 +33,7 @@ class SampleSocket : Socket
       if(connectedSocket == this)
          connectedSocket = null;
       else if(servingSocket == this)
-         servingSocket = null;      
+         servingSocket = null;    
    }
 
    unsigned int OnReceive(unsigned char * buffer, unsigned int count)
@@ -42,6 +42,7 @@ class SampleSocket : Socket
       {
          SamplePacket * packet = (SamplePacket *) buffer;
          uint size = sizeof(SamplePacket) + packet->stringLen;
+
          if(count >= size)
          {
             portssetup.recvString.contents = packet->string;
@@ -54,25 +55,26 @@ class SampleSocket : Socket
    }
 }
 
-class Mysocket17 : Window
+class SocketSample : Window
 {
-   caption = "Mysocket1";
-   background = black;
-   foreground = white;
-   borderStyle = fixed;
+   text = "Socket Sample";
+   background = activeBorder;
+   borderStyle = sizable;
+   hasMaximize = true;
+   hasMinimize = true;
    hasClose = true;
+   tabCycle = true;
    size = { 416, 176 };
-   nativeDecorations = false;
+   nativeDecorations = true;
 
    bool listening;
-
-      bool () 
+   
+      bool ()
       {
          connectedSocket = SampleSocket { };
          connectedSocket.Connect(portssetup.serverAddress.contents, samplePort);
          return true;
       }
-
 
    void OnDestroy()
    {
@@ -82,6 +84,6 @@ class Mysocket17 : Window
    }
 }
 
-Mysocket17 mysocket {mainpanel, autoCreate = false };
-SampleService service { port = samplePort  };
+SocketSample mysocket { autoCreate = false; };
+SampleService service { port = samplePort };
 SampleSocket connectedSocket, servingSocket;

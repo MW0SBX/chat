@@ -46,9 +46,9 @@ typedef byte XWord[2];
 
 /////////////////////////////////////////////////////////////////////
 
-define SERVER_PORT = 7649;
+define SERVER_PORT = (atoi(portssetup.serverPort.contents));
 
-define MAX_HANDLES = 16;
+define MAX_HANDLES = 5000;
 
 // Packets sent from Client to Server
 
@@ -89,6 +89,7 @@ class NetworkServer : Service
    void OnAccept()
    {
       ClientConnection socket { this };
+      mainpanel.picture68.visible = true;
       clients.Add(socket);
       Logf("Connection from %s, port %d\n", socket.inetAddress, SERVER_PORT);
    }
@@ -214,6 +215,7 @@ class ClientConnection : Socket
    {
       delete readBuf;
       ((NetworkServer)service).clients.Remove(this);
+      mainpanel.picture68.visible = false;
    }
 }
 

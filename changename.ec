@@ -61,8 +61,6 @@ class Changename : Window
         enckey.Destroy(0);
         help.Destroy(0);
         sounds.Destroy(0);
-        surfer.Destroy(0);
-        portssetup.Destroy(0);
         info.Destroy(0);
          
       return true;

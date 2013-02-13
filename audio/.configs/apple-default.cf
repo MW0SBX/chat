@@ -1,0 +1,30 @@
+# TOOLCHAIN
+
+CPP := $(CCACHE_COMPILE)$(DISTCC_COMPILE)$(GCC_PREFIX)gcc$(_SYSROOT)
+CC := $(CCACHE_COMPILE)$(DISTCC_COMPILE)$(GCC_PREFIX)gcc$(_SYSROOT)
+CXX := $(CCACHE_COMPILE)$(DISTCC_COMPILE)$(GCC_PREFIX)g++$(_SYSROOT)
+ECP := $(if $(ECP_DEBUG),ide -debug-start $(ECERE_SDK_SRC)/compiler/ecp/ecp.epj -@,ecp)
+ECC := $(if $(ECC_DEBUG),ide -debug-start $(ECERE_SDK_SRC)/compiler/ecc/ecc.epj -@,ecc)$(if $(CROSS_TARGET), -t $(TARGET_PLATFORM),)
+ECS := $(if $(ECS_DEBUG),ide -debug-start $(ECERE_SDK_SRC)/compiler/ecs/ecs.epj -@,ecs)$(if $(CROSS_TARGET), -t $(TARGET_PLATFORM),)
+EAR := ear
+AS := $(GCC_PREFIX)as
+LD := $(GCC_PREFIX)ld
+AR := $(GCC_PREFIX)ar
+STRIP := $(GCC_PREFIX)strip
+UPX := upx
+
+UPXFLAGS = -9
+
+EARFLAGS = 
+
+# HARD CODED TARGET_PLATFORM-SPECIFIC OPTIONS
+LDFLAGS +=$(if $(LINUX_TARGET), -Wl$(comma)--no-undefined,)
+
+LDFLAGS +=$(if $(OSX_TARGET), -framework cocoa -framework OpenGL,)
+
+CFLAGS += -fmessage-length=0
+
+FORCE_64_BIT := -m64
+FORCE_32_BIT := -m32
+
+OFLAGS += $(LDFLAGS)

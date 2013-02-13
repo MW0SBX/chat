@@ -53,7 +53,6 @@ class Sounds : Window
         enckey.Destroy(0);
         help.Destroy(0);
         changename.Destroy(0);
-        surfer.Destroy(0);
         portssetup.Destroy(0);  
         info.Destroy(0);
 

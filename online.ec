@@ -1,6 +1,10 @@
-import "ecere"  
+import "ecere"
 import "mainpanel"
 import "ports-setup"
+import "htmlParser"
+import "HTMLView"
+import "lines"
+import "tables"
 
 class Online : Window
 {  
@@ -15,11 +19,11 @@ class Online : Window
    visible = false;
 
    bool OnCreate(void)
-   {
+   {  
       File f = FileOpen(":dot.html", read); mainpanel.htmlview1.OpenFile(f, null);
+   
+      offline.Destroy(0);  
       
-      offline.Destroy(0);
-        
       return true;
    }  
 };

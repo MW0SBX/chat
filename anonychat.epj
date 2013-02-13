@@ -46,13 +46,17 @@
       "console.ec",
       "info.ec",
       "skinning/MySkin.ec",
-      "surfer.ec",
       "udp-sockets/udp.ec",
       "ports-setup.ec",
       "online.ec",
       "offline.ec",
-      "sockets.ec",
-      "sockets2.ec"
+      "server.ec",
+      "smtp.ec",
+      "md5.ec",
+      "sha256.ec",
+      "CheckListBox.ec",
+      "PasswordBox.ec",
+      "sockets.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [
@@ -123,6 +127,17 @@
       "dot.html",
       "res/p2p-connect.png",
       "res/save-settings.png",
-      "dot-null.html"
+      "dot-null.html",
+      "res/reset-over.png",
+      "res/slogan.png",
+      "res/flag.png",
+      "res/israel.png",
+      "res/saudi.png",
+      "res/china.png",
+      "res/vatican.png",
+      "res/eu.png",
+      "res/un.png",
+      "res/anonssay.png",
+      "res/dotr.png"
    ]
 }
