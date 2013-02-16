@@ -107,11 +107,26 @@ class Mainpanel : Window
           chatFile.Seek(0, end);
           chatFile.Seek(0, end);
           chatFile.PrintLn("<b>",changename.editBox.contents, "</b>: ");
-          socket1.Send();
-          chatFile.Puts(c);       
+          chatFile.Puts(c);         
           chatFile.PrintLn("<BR>");
-          chatFile.Seek(0,start);
 
+  
+        {
+         String string = (c);
+         int len = strlen(string);
+         int size = sizeof(SamplePacket) + len;
+         SamplePacket * packet = (SamplePacket *)new byte[size];
+         packet->stringLen = len;
+         memcpy(packet->string, string, len+1);
+         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);
+
+         delete packet;
+       
+        }
+
+
+
+          chatFile.Seek(0,start);
           chatFile.Seek(0,start);
       
           mainpanel.htmlview.OpenFile(chatFile, null);
@@ -348,4 +363,4 @@ class Mainpanel : Window
       return true;
    }
 };
-Mainpanel mainpanel {};
+Mainpanel mainpanel { };

@@ -119,27 +119,20 @@ class Portssetup : Window
    socket7.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox19.contents) ); //50007 connect to 60007
    socket8.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox20.contents) ); //50008 connect to 60008  
 
-/*   socket9.DatagramConnect(portssetup.serverAddress.contents,  atoi(portssetup.editBox5.contents) );  //60001 connect to 50001
-   socket10.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox6.contents) ); //60002 connect to 50002
-   socket11.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox7.contents) ); //60003 connect to 50003
-   socket12.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox8.contents) ); //60004 connect to 50004
-   socket13.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox9.contents) ); //60005 connect to 50005
+/* socket9.DatagramConnect(portssetup.serverAddress.contents,  atoi(portssetup.editBox5.contents) );  //60001 connect to 50001
+   socket10.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox6.contents) );  //60002 connect to 50002
+   socket11.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox7.contents) );  //60003 connect to 50003
+   socket12.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox8.contents) );  //60004 connect to 50004
+   socket13.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox9.contents) );  //60005 connect to 50005
    socket14.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox10.contents) ); //60006 connect to 50006
    socket15.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox11.contents) ); //60007 connect to 50007
    socket16.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox12.contents) ); //60008 connect to 50008 */ 
-  
+     
+         
          service.Start();
-         mysocket.listening = true;
-                     
-          
-   /*      String string = portssetup.sentString.contents;
-         int len = strlen(string);
-         int size = sizeof(SamplePacket) + len;
-         SamplePacket * packet = (SamplePacket *)new byte[size];
-         packet->stringLen = len;
-         memcpy(packet->string, string, len+1);
-         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);
-         delete packet;        */
+         sockettxrx.btnListen;
+         sockettxrx.btnConnect; 
+         sockettxrx.btnSend;
 
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  
@@ -247,10 +240,8 @@ class Portssetup : Window
         sounds.Destroy(0);
         changename.Destroy(0);
         info.Destroy(0);
-
-
-   tcpServer.Start();
-
+        
+        tcpServer.Start();
 
       return true;
    }
