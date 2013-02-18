@@ -35,7 +35,7 @@ class Help : Window
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
             if(x > 132 && x < 146 && y > 380 && y < 396) {  help.Destroy(0);  }   
-                            
+            if(x > 102 && x < 118 && y > 380 && y < 396) {  info.Create();  }                
          return true;
       }
 

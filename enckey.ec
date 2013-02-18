@@ -61,7 +61,7 @@ class Enckey : Window
          }
          if(x > 283 && x < 383 && y > 88 && y < 113) {  enckey.Destroy(0); }
          if(x > 128 && x < 147 && y > 97 && y < 111) {  enckey.Destroy(0);  }   
-
+         if(x > 102 && x < 118 && y > 97 && y < 111) {  info.Create();  }
          }
 
       bool OnMouseMove(int x, int y, Modifiers mods)

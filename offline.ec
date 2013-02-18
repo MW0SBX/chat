@@ -1,7 +1,24 @@
 import "ecere"  
 import "mainpanel"
 import "ports-setup"
-import "sockets"
+import "socket1udp"
+import "socket2udp"
+import "socket3udp"
+import "socket4udp"
+import "socket5udp"
+import "socket6udp"
+import "socket7udp"
+import "socket8udp"
+import "socket9udp"
+import "socket10udp"
+import "socket11udp"
+import "socket12udp"
+import "socket13udp"
+import "socket14udp"
+import "socket15udp"
+import "socket16udp"
+import "socket17tcp" 
+import "socket18tcp"
 
 class Offline : Window
 {
@@ -31,7 +48,8 @@ class Offline : Window
    bool OnClose(bool parentClosing)
    {
     
-      service.Stop();
+      service17.Stop();
+      service18.Stop();
       tcpServer.Stop();
    
       delete socket1; socket1 = { };
@@ -49,8 +67,7 @@ class Offline : Window
       delete socket13; socket13 = { };
       delete socket14; socket14 = { };
       delete socket15; socket15 = { };
-      delete socket16; socket16 = { }; 
-
+      delete socket16; socket16 = { };
 
    mainpanel.picture49.visible = false;
    mainpanel.picture50.visible = false;
@@ -68,9 +85,11 @@ class Offline : Window
    mainpanel.picture62.visible = false;
    mainpanel.picture63.visible = false;
    mainpanel.picture64.visible = false;
-   mainpanel.picture65.visible = false;
-   mainpanel.picture66.visible = false;
-   mainpanel.picture67.visible = false;    
+   mainpanel.picture68.visible = false;
+   mainpanel.picture69.visible = false;
+   mainpanel.picture70.visible = false;    
+   
+   mainpanel.picture65.visible = true;
 
 
       return true;

@@ -15,7 +15,7 @@ class Changename : Window
 
    Picture picture1 
    {
-      this, caption = "mainframe", position = {  }, image = { ":nickname.gif" };
+      this, caption = "mainframe", position = {  }, image = { ":nickname.png" };
 
       bool NotifyActivate(Window window, bool active, Window previous)
       {
@@ -25,11 +25,11 @@ class Changename : Window
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
-         if(x > 0 && x < 400 && y > 0 && y < 39) { changename.MenuWindowMove(null, mods); }
-         if(x > 300 && x < 370 && y > 0 && y < 39) { changename.MenuWindowMove(null, mods); }
-         if(x > 370 && x < 400 && y > 100 && y < 120) { changename.MenuWindowMove(null, mods); }
-         if(x > 0 && x < 400 && y > 103 && y < 120) { changename.MenuWindowMove(null, mods); }      
-         if(x > 0 && x < 100 && y > 0 && y < 120) { changename.MenuWindowMove(null, mods); }
+   //      if(x > 0 && x < 400 && y > 0 && y < 39) { changename.MenuWindowMove(null, mods); }
+   //      if(x > 300 && x < 370 && y > 0 && y < 39) { changename.MenuWindowMove(null, mods); }
+   //      if(x > 370 && x < 400 && y > 100 && y < 120) { changename.MenuWindowMove(null, mods); }
+   //      if(x > 0 && x < 400 && y > 103 && y < 120) { changename.MenuWindowMove(null, mods); }      
+   //      if(x > 0 && x < 100 && y > 0 && y < 120) { changename.MenuWindowMove(null, mods); }
 
          return true; 
 
@@ -37,10 +37,11 @@ class Changename : Window
 
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
-            if(x > 267 && x < 370 && y > 70 && y < 102) {  changename.Destroy(0);  }
-            if(x > 143 && x < 248 && y > 70 && y < 102) {  changename.editBox.contents = ""; } 
-            if(x > 267 && x < 370 && y > 70 && y < 102) {  File f = FileOpen("user_details.txt", write); f.PrintLn(" ", changename.editBox.contents, "   "); delete f;}
-       
+            if(x > 102 && x < 118 && y > 97 && y < 111) {  info.Create();  } 
+            if(x > 128 && x < 147 && y > 97 && y < 111) {  changename.Destroy(0);  }   
+            if(x > 321 && x < 354 && y > 33 && y < 66) {  changename.editBox.contents = ""; } 
+            if(x > 352 && x < 388 && y > 33 && y < 66) {  File f = FileOpen("user_details.txt", write); f.PrintLn(" ", changename.editBox.contents, "   "); delete f;}
+            if(x > 352 && x < 388 && y > 33 && y < 66) {changename.Destroy(0);  }
               
          return true;
       }
@@ -52,7 +53,7 @@ class Changename : Window
          return true;
       }
    }
-   EditBox editBox { this, caption = "default", size = { 184, 19 }, position = { 130, 40 }, contents = "Anonymous" };
+   EditBox editBox { this, caption = "default", size = { 184, 25 }, position = { 110, 40 }, contents = "Anonymous" };
 
    bool OnCreate(void)
    {
@@ -62,6 +63,7 @@ class Changename : Window
         help.Destroy(0);
         sounds.Destroy(0);
         info.Destroy(0);
+        portssetup.Destroy(0);
          
       return true;
    }

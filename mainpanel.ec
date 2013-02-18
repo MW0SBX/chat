@@ -11,11 +11,27 @@ import "htmlParser"
 import "HTMLView"
 import "lines"
 import "tables"
-import "udp"
 import "online"        
 import "offline"  
 import "server"
-import "sockets"
+import "socket1udp"
+import "socket2udp"
+import "socket3udp"
+import "socket4udp"
+import "socket5udp"
+import "socket6udp"
+import "socket7udp"
+import "socket8udp"
+import "socket9udp"
+import "socket10udp"
+import "socket11udp"
+import "socket12udp"
+import "socket13udp"
+import "socket14udp"
+import "socket15udp"
+import "socket16udp"
+import "socket17tcp"
+import "socket18tcp"
 import "smtp"
 import "md5"
 import "sha256"
@@ -49,7 +65,6 @@ Map<String, String> smileys
    { ":)", ":smiley1.png" }
 ] };
 
-  // Socket::Send()
 
  class MyApp : GuiApplication
  {
@@ -64,8 +79,7 @@ class Mainpanel : Window
    interim = true;
    size = { 988, 734 };
    anchor = { horz = -188, vert = -11 };
-   moveable = true;
-   
+   moveable = true;  
 // alphaBlend = true;
 
    bool OnKeyDown(Key key, unichar ch)
@@ -103,41 +117,35 @@ class Mainpanel : Window
                 c = s2;
              }
           }
-
           chatFile.Seek(0, end);
           chatFile.Seek(0, end);
           chatFile.PrintLn("<b>",changename.editBox.contents, "</b>: ");
           chatFile.Puts(c);         
           chatFile.PrintLn("<BR>");
-
-  
         {
          String string = (c);
          int len = strlen(string);
-         int size = sizeof(SamplePacket) + len;
-         SamplePacket * packet = (SamplePacket *)new byte[size];
+         int size = sizeof(SamplePacket17) + len;
+         SamplePacket17 * packet = (SamplePacket17 *)new byte[size];
          packet->stringLen = len;
          memcpy(packet->string, string, len+1);
-         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);
-
+         (connectedSocket17 ? connectedSocket17 : servingSocket17).Send(packet, size);
+      
+        
          delete packet;
-       
-        }
-
-
-
+        }    
+        
           chatFile.Seek(0,start);
           chatFile.Seek(0,start);
       
           mainpanel.htmlview.OpenFile(chatFile, null);
-
           mainpanel.htmlview.OnUnloadGraphics();   // This seems to be needed right now to properly load bitmaps
           mainpanel.htmlview.OnLoadGraphics();
-
           mainpanel.htmlview.scroll.y = mainpanel.htmlview.scrollArea.h;
 
           if(c != command)
             delete c;
+       
          return false;
       }
    };
@@ -159,15 +167,16 @@ class Mainpanel : Window
    Label labe26 { picture1, this, "Port16", position = { 726, 260 } };
    Label labe27 { picture1, this, "UDP PORTS", position = { 622, 100 } };
    Label labe28 { picture1, this, "TCP PORTS", position = { 622, 280 } };
-   Label labe29 { picture1, this, "Port1(RX)", position = { 638, 300 } };
-   Label labe30 { picture1, this, "Port2(TX)", position = { 722, 300 } };
-   Label labe31 { picture1, this, "TCP SERVER", position = { 652, 320 } };
-   Picture picture70 { picture1, this, "picture70", size = { 8, 8 }, position = { 622, 300 }, visible = true, image = { ":dotr.png" } };
-   Picture picture69 { picture1, this, "picture69", size = { 8, 8 }, position = { 706, 300 }, visible = true, image = { ":dotr.png" } };
-   Picture picture68 { picture1, this, "picture68", size = { 8, 8 }, position = { 622, 320 }, visible = true, image = { ":dotr.png" } };
-   Picture picture67 { picture1, this, "picture67", size = { 8, 8 }, position = { 622, 300 }, visible = false, image = { ":dot.png" } };
-   Picture picture66 { picture1, this, "picture66", size = { 8, 8 }, position = { 706, 300 }, visible = false, image = { ":dot.png" } };
-   Picture picture65 { picture1, this, "picture65", size = { 8, 8 }, position = { 632, 320 }, visible = false, image = { ":dot.png" } };
+   Label labe29 { picture1, this, "Port1", position = { 638, 300 } };
+   Label labe30 { picture1, this, "Port2", position = { 722, 300 } };
+   Label labe31 { picture1, this, "TCP SERVER", position = { 642, 320 } };
+   Picture picture70 { picture1, this, "picture70", size = { 8, 8 }, position = { 622, 300 }, visible = false, image = { ":dot.png" } };
+   Picture picture69 { picture1, this, "picture69", size = { 8, 8 }, position = { 706, 300 }, visible = false, image = { ":dot.png" } };
+   Picture picture68 { picture1, this, "picture68", size = { 8, 8 }, position = { 622, 320 }, visible = true, image = { ":dot.png" } };
+   Picture picture67 { picture1, this, "picture67", size = { 8, 8 }, position = { 622, 300 }, visible = true, image = { ":dotr.png" } }; //port1 tcp
+   Picture picture66 { picture1, this, "picture66", size = { 8, 8 }, position = { 706, 300 }, visible = true, image = { ":dotr.png" } }; //port2 tcp
+   Picture picture65 { picture1, this, "picture65", size = { 8, 8 }, position = { 622, 320 }, visible = true, image = { ":dotr.png" } }; //tcp server
+
    Picture picture64 { picture1, this, "picture64", size = { 8, 8 }, position = { 706, 260 }, visible = false, image = { ":dot.png" } };//port16
    Picture picture63 { picture1, this, "picture63", size = { 8, 8 }, position = { 706, 240 }, visible = false, image = { ":dot.png" } };
    Picture picture62 { picture1, this, "picture62", size = { 8, 8 }, position = { 706, 220 }, visible = false, image = { ":dot.png" } };
@@ -242,7 +251,7 @@ class Mainpanel : Window
    ProgressBar progressBar1  { picture1, this, "progressBar1", inactive = true, opacity = 0, borderStyle = contour, size = { 585, 23 }, position = { 104, 42 } };
    Picture picture1
    {
-      this, caption = "picture1", inactive = false, position = {  }, image = { "/users/microchip/anonychat/res/chat-window22.pcx", alphaBlend = true };
+      this, caption = "picture1", inactive = false, position = {  }, image = { ":chat-window22.pcx", alphaBlend = true };
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {

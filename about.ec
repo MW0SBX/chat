@@ -9,7 +9,7 @@ class About : Window
    hasClose = true;
    stayOnTop = true;
    clientSize = { 400, 400 };
-   position = { 150, 150 };
+   position = { 155, 140 };
    moveable = true;
 
    Picture picture1 
@@ -32,9 +32,9 @@ class About : Window
       };
 
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
-      {
-            if(x > 160 && x < 260 && y > 360 && y < 400) {  about.Destroy(0);  }   
-                            
+      {  
+            if(x > 132 && x < 146 && y > 380 && y < 396) {  about.Destroy(0);  }   
+            if(x > 102 && x < 118 && y > 380 && y < 396) {  info.Create();  }                
          return true;
       }
 

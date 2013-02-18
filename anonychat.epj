@@ -46,7 +46,6 @@
       "console.ec",
       "info.ec",
       "skinning/MySkin.ec",
-      "udp-sockets/udp.ec",
       "ports-setup.ec",
       "online.ec",
       "offline.ec",
@@ -56,11 +55,27 @@
       "sha256.ec",
       "CheckListBox.ec",
       "PasswordBox.ec",
-      "sockets.ec"
+      "socket1udp.ec",
+      "socket10udp.ec",
+      "socket11udp.ec",
+      "socket12udp.ec",
+      "socket13udp.ec",
+      "socket14udp.ec",
+      "socket15udp.ec",
+      "socket16udp.ec",
+      "socket2udp.ec",
+      "socket3udp.ec",
+      "socket4udp.ec",
+      "socket5udp.ec",
+      "socket6udp.ec",
+      "socket7udp.ec",
+      "socket8udp.ec",
+      "socket9udp.ec",
+      "socket18tcp.ec",
+      "socket17tcp.ec"
    ],
    "ResourcesPath" : "",
    "Resources" : [
-      "res/chat-form2.png",
       "res/clear_over.gif",
       "res/encryption.gif",
       "res/help.gif",
@@ -138,6 +153,9 @@
       "res/eu.png",
       "res/un.png",
       "res/anonssay.png",
-      "res/dotr.png"
+      "res/dotr.png",
+      "psd/chat-form2.png",
+      "res/sounds.png",
+      "res/nickname.png"
    ]
 }

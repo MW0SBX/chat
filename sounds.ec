@@ -15,7 +15,7 @@ class Sounds : Window
 
    Picture picture1 
    {
-      this, caption = "mainframe", inactive = false, position = {  }, image = { ":sounds.gif" };
+      this, caption = "mainframe", inactive = false, position = {  }, image = { ":sounds.png" };
 
       bool NotifyActivate(Window window, bool active, Window previous)
       {
@@ -35,7 +35,7 @@ class Sounds : Window
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
             if(x > 128 && x < 147 && y > 97 && y < 111) {  sounds.Destroy(0);  }   
-                            
+            if(x > 102 && x < 118 && y > 97 && y < 111) {  info.Create();  }                 
          return true;
       }
 

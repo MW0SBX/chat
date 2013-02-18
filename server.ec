@@ -92,6 +92,7 @@ class NetworkServer : Service
       mainpanel.picture68.visible = true;
       clients.Add(socket);
       Logf("Connection from %s, port %d\n", socket.inetAddress, SERVER_PORT);
+
    }
 };
 
@@ -230,6 +231,7 @@ class ServerApp : GuiApplication
       if(tcpServer.Start())
       {
          Log("Server started\n");
+
          while(true)
          {
             WaitEvent();

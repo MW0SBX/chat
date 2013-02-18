@@ -1,8 +1,23 @@
 import "ecere"  
 import "mainpanel"
-import "udp"
 import "sockets"
-
+import "socket1udp"
+import "socket2udp"
+import "socket3udp"
+import "socket4udp"
+import "socket5udp"
+import "socket6udp"
+import "socket7udp"
+import "socket8udp"
+import "socket9udp"
+import "socket10udp"
+import "socket11udp"
+import "socket12udp"
+import "socket13udp"
+import "socket14udp"
+import "socket15udp"
+import "socket16udp"
+import "socket18tcp"
 
 class Portssetup : Window
 {
@@ -129,10 +144,16 @@ class Portssetup : Window
    socket16.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox12.contents) ); //60008 connect to 50008 */ 
      
          
-         service.Start();
-         sockettxrx.btnListen;
-         sockettxrx.btnConnect; 
-         sockettxrx.btnSend;
+         service17.Start();        //port 40001
+         sockettxrx17.btnListen;
+         sockettxrx17.btnConnect; 
+         sockettxrx17.btnSend;
+            
+         service18.Start();       //port 40002
+         sockettxrx18.btnListen;
+         sockettxrx18.btnConnect; 
+         sockettxrx18.btnSend;
+
 
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  
@@ -148,7 +169,7 @@ class Portssetup : Window
       bool OnLeftButtonUp(int x, int y, Modifiers mods)
       {
             if(x > 132 && x < 146 && y > 380 && y < 396) { portssetup.Destroy(0); }           
-          
+            if(x > 102 && x < 118 && y > 380 && y < 396) {  info.Create();  }
          return true;
       }
 
@@ -242,6 +263,8 @@ class Portssetup : Window
         info.Destroy(0);
         
         tcpServer.Start();
+        mainpanel.picture68.visible = true;
+        mainpanel.picture65.visible = false; 
 
       return true;
    }
