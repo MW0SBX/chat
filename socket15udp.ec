@@ -37,7 +37,7 @@ class MySocket15 : Socket
 
       return 0;
    }
-      bool ()
+   /*   bool ()
       {
          String string = portssetup.sentString.contents;  //sentString  in portssetup 
          int len = strlen(string);
@@ -49,7 +49,7 @@ class MySocket15 : Socket
 
          delete packet;
          return true;
-      }  
+      }  */
 }
 
 MySocket15 socket15 {};
