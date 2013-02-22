@@ -37,19 +37,20 @@ class MySocket1 : Socket
 
       return 0;
    }
-      bool ()
-      {
-         String string = portssetup.sentString.contents;  //sentString  in portssetup 
-         int len = strlen(string);
-         int size = sizeof(SamplePacket1) + len;
-         SamplePacket1 * packet = (SamplePacket1 *)new byte[size];
-         packet->stringLen = len;
-         memcpy(packet->string, string, len+1);
-         (socket1).Send(packet, size);
+   /*
+   
+   {
+      String string = portssetup.sentString.contents;  //sentString  in portssetup 
+      int len = strlen(string);
+      int size = sizeof(SamplePacket1) + len;
+      SamplePacket1 * packet = (SamplePacket1 *)new byte[size];
+      packet->stringLen = len;
+      memcpy(packet->string, string, len+1);
+      (socket1).Send(packet, size);
 
-         delete packet;
-         return true;
-      }  
+      delete packet;
+      return true;
+   }*/
 }
 
 MySocket1 socket1 {};
