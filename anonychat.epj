@@ -71,7 +71,6 @@
       "socket7udp.ec",
       "socket8udp.ec",
       "socket9udp.ec",
-      "socket18tcp.ec",
       "socket17tcp.ec"
    ],
    "ResourcesPath" : "",

@@ -31,12 +31,12 @@ import "socket14udp"
 import "socket15udp"
 import "socket16udp"
 import "socket17tcp"
-import "socket18tcp"
 import "smtp"
 import "md5"
 import "sha256"
 import "CheckListBox"  
 import "passwordBox"
+
 
 TempFile chatFile { };
 
@@ -71,6 +71,7 @@ Map<String, String> smileys
     skin = "My";
  }
 
+
 class Mainpanel : Window
 {
    caption = "Mainpanel";
@@ -88,9 +89,9 @@ class Mainpanel : Window
          return true;
       }
 
-   HTMLView htmlview1 { picture1, this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 816, top = 56, right = 34, bottom = 413 }, hasVertScroll = true };
-   HTMLView htmlview2 { picture1, this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 815, top = 354, right = 35, bottom = 95 }, hasVertScroll = true }; 
-   HTMLView htmlview  { console,  this, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 0, top = 0, right = 0, bottom = 60 }, hasVertScroll = true };
+   HTMLView htmlview1 { picture1, this, dontHideScroll =true, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 816, top = 56, right = 34, bottom = 413 }, hasVertScroll = true };
+   HTMLView htmlview2 { picture1, this, dontHideScroll =true, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 815, top = 354, right = 35, bottom = 95 }, hasVertScroll = true }; 
+   HTMLView htmlview  { console,  this, dontHideScroll =true, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 0, top = 0, right = 0, bottom = 60 }, hasVertScroll = true };
    Console console
    {
       picture1, this, opacity = 0, editHeight = 56, drawBehind = true, size = { 490, 635 }, position = { 112, 72 }, editTextColor = white, font = { "Comic Sans MS", 10 }; 
@@ -117,37 +118,51 @@ class Mainpanel : Window
                 c = s2;
              }
           }
+ 
           chatFile.Seek(0, end);
           chatFile.Seek(0, end);
           chatFile.PrintLn("<b>",changename.editBox.contents, "</b>: ");
           chatFile.Puts(c);         
           chatFile.PrintLn("<BR>");
-        {
-         String string = (c);
+      
+      connectedSocket.Connect("localhost", samplePort);
+      {
+
+         String string = changename.editBox.contents;
          int len = strlen(string);
-         int size = sizeof(SamplePacket17) + len;
-         SamplePacket17 * packet = (SamplePacket17 *)new byte[size];
+         int size = sizeof(SamplePacket) + len;
+         SamplePacket * packet = (SamplePacket *)new byte[size];
          packet->stringLen = len;
          memcpy(packet->string, string, len+1);
-         (connectedSocket17 ? connectedSocket17 : servingSocket17).Send(packet, size);
-      
-        
-         delete packet;
-        }    
-        
+         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);
+      }
+      {
+         String string = (c);
+         int len = strlen(string);
+         int size = sizeof(SamplePacket) + len;
+         SamplePacket * packet = (SamplePacket *)new byte[size];
+         packet->stringLen = len;
+         memcpy(packet->string, string, len+1);
+         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);   
+         
+         delete packet; 
+        } 
+          
           chatFile.Seek(0,start);
           chatFile.Seek(0,start);
-      
+
           mainpanel.htmlview.OpenFile(chatFile, null);
           mainpanel.htmlview.OnUnloadGraphics();   // This seems to be needed right now to properly load bitmaps
           mainpanel.htmlview.OnLoadGraphics();
           mainpanel.htmlview.scroll.y = mainpanel.htmlview.scrollArea.h;
 
-          if(c != command)
-            delete c;
-       
+           if(c != command)
+           delete c;
+
          return false;
+
       }
+
    };
    Label label1 { picture1, this, "Port1(RX)", position = { 642, 120 } };
    Label label2 { picture1, this, "Port2", position = { 642, 140 } };
@@ -170,9 +185,9 @@ class Mainpanel : Window
    Label labe29 { picture1, this, "Port1", position = { 638, 300 } };
    Label labe30 { picture1, this, "Port2", position = { 722, 300 } };
    Label labe31 { picture1, this, "TCP SERVER", position = { 642, 320 } };
-   Picture picture70 { picture1, this, "picture70", size = { 8, 8 }, position = { 622, 300 }, visible = false, image = { ":dot.png" } };
-   Picture picture69 { picture1, this, "picture69", size = { 8, 8 }, position = { 706, 300 }, visible = false, image = { ":dot.png" } };
-   Picture picture68 { picture1, this, "picture68", size = { 8, 8 }, position = { 622, 320 }, visible = true, image = { ":dot.png" } };
+   Picture picture70 { picture1, this, "picture70", size = { 8, 8 }, position = { 622, 300 }, visible = false, image = { ":dot.png" } }; //port1
+   Picture picture69 { picture1, this, "picture69", size = { 8, 8 }, position = { 706, 300 }, visible = false, image = { ":dot.png" } }; //port2
+   Picture picture68 { picture1, this, "picture68", size = { 8, 8 }, position = { 622, 320 }, visible = false, image = { ":dot.png" } }; //tcp server
    Picture picture67 { picture1, this, "picture67", size = { 8, 8 }, position = { 622, 300 }, visible = true, image = { ":dotr.png" } }; //port1 tcp
    Picture picture66 { picture1, this, "picture66", size = { 8, 8 }, position = { 706, 300 }, visible = true, image = { ":dotr.png" } }; //port2 tcp
    Picture picture65 { picture1, this, "picture65", size = { 8, 8 }, position = { 622, 320 }, visible = true, image = { ":dotr.png" } }; //tcp server
@@ -306,7 +321,7 @@ class Mainpanel : Window
             if(x > 0 && x < 518 && y > 700 && y < 750)  { enckey.Destroy(0); }
             if(x > 0 && x < 518 && y > 700 && y < 750)  { changename.Destroy(0); }
             if(x > 0 && x < 518 && y > 700 && y < 750)  { info.Destroy(0); }   
-
+            if(x > 0 && x < 518 && y > 700 && y < 750)  { portssetup.Destroy(0); }
 
          return true;
       }
@@ -366,10 +381,10 @@ class Mainpanel : Window
 
    bool OnCreate(void)
    {    
-
    portssetup.Create();
 
       return true;
    }
 };
+
 Mainpanel mainpanel { };

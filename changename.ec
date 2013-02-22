@@ -4,7 +4,7 @@ import "mainpanel"
   
 class Changename : Window
 {
-   caption = "Changename";
+   caption = "";
    background = black;
    borderStyle = fixed;
    hasClose = true;

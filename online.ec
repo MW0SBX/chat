@@ -8,7 +8,7 @@ import "tables"
 
 class Online : Window
 {  
-   caption = "Online";
+   caption = "";
    background = 0;
    opacity = 0;
    inactive = true;

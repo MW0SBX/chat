@@ -1,5 +1,5 @@
 public import "ecere"
-
+import "mainpanel" 
 
 define app = ((MyApp)__thisModule);
 

@@ -4,7 +4,7 @@ import "console"
 
 class Enckey : Window 
 {
-   caption = "Enckey";
+   caption = "";
    background = black;
    borderStyle = fixed;
    hasClose = true;

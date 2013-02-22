@@ -18,11 +18,10 @@ import "socket14udp"
 import "socket15udp"
 import "socket16udp"
 import "socket17tcp" 
-import "socket18tcp"
 
 class Offline : Window
 {
-   caption = "Offline";
+   caption = "";
    background = black;
    opacity = 0;
    inactive = true;
@@ -47,11 +46,18 @@ class Offline : Window
 
    bool OnClose(bool parentClosing)
    {
-    
-      service17.Stop();
-      service18.Stop();
+        
+      service.Stop();
+      mainpanel.picture70.visible = false;
+      mainpanel.picture67.visible = true; 
+      
+
+   //   mainpanel.picture69.visible = false;
+   //   mainpanel.picture66.visible = true;
+
       tcpServer.Stop();
-   
+
+
       delete socket1; socket1 = { };
       delete socket2; socket2 = { };
       delete socket3; socket3 = { };
@@ -68,6 +74,7 @@ class Offline : Window
       delete socket14; socket14 = { };
       delete socket15; socket15 = { };
       delete socket16; socket16 = { };
+ 
 
    mainpanel.picture49.visible = false;
    mainpanel.picture50.visible = false;

@@ -1,6 +1,6 @@
 import "ecere"
 import "mainpanel"
-import "ports-setup"
+
 
 define samplePort12 = (atoi(portssetup.editBox16.contents));
 

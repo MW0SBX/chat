@@ -3,7 +3,7 @@ import "mainpanel"
 
 class Info : Window
 {
-   caption = "info";
+   caption = "";
    background = black;
    borderStyle = fixed;
    hasClose = true;

@@ -1,6 +1,5 @@
 import "ecere"  
 import "mainpanel"
-import "sockets"
 import "socket1udp"
 import "socket2udp"
 import "socket3udp"
@@ -17,7 +16,7 @@ import "socket13udp"
 import "socket14udp"
 import "socket15udp"
 import "socket16udp"
-import "socket18tcp"
+import "socket17tcp"
 
 class Portssetup : Window
 {
@@ -142,19 +141,10 @@ class Portssetup : Window
    socket14.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox10.contents) ); //60006 connect to 50006
    socket15.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox11.contents) ); //60007 connect to 50007
    socket16.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox12.contents) ); //60008 connect to 50008 */ 
-     
-         
-         service17.Start();        //port 40001
-         sockettxrx17.btnListen;
-         sockettxrx17.btnConnect; 
-         sockettxrx17.btnSend;
-            
-         service18.Start();       //port 40002
-         sockettxrx18.btnListen;
-         sockettxrx18.btnConnect; 
-         sockettxrx18.btnSend;
-
-
+   
+  
+   service.Start();       //port 40001 
+   
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  
    portssetup.picture20.visible = true;

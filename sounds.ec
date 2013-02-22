@@ -4,7 +4,7 @@ import "mainpanel"
 
 class Sounds : Window
 {
-   caption = "Sounds";
+   caption = "";
    background = black;
    borderStyle = fixed;
    hasClose = true;

@@ -771,13 +771,13 @@ public class MySkin_Window : Window
          else
          {
             statusBar.visible = true;
-            statusBar.anchor = { left = clientStart.x, bottom = border };
+            statusBar.anchor = { right = clientStart.x, bottom = border };
             statusBar.size.w = size.w - insideBorder * 2;
          }
       }
       if(minimizeButton)
       {
-         minimizeButton.anchor = { right = 43 + border, top = top + BUTTON_OFFSET };
+         minimizeButton.anchor = { left = 43 + border, top = top + BUTTON_OFFSET };
          minimizeButton.size = { 15, 15 };
          minimizeButton.bevel = true;
          minimizeButton.bitmap = { skinBitmaps[(state == minimized) ? restore : minimize] };

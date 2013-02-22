@@ -4,7 +4,7 @@ import "mainpanel"
 
 class Help : Window
 {
-   caption = "Help";
+   caption = "";
    background = black;
    borderStyle = fixed;
    hasClose = true;
