@@ -66,7 +66,7 @@ void Send(char * host, char * to, char * from, File file)
    }
    delete socket;
 }
-
+/*
 class MyApp : GuiApplication
 {
    void Main()
@@ -78,3 +78,4 @@ class MyApp : GuiApplication
      // getch();
    }   
 }
+*/
