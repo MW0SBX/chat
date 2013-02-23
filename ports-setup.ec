@@ -144,9 +144,7 @@ class Portssetup : Window
    
   
    service.Start();       //port 40001 
-   sockettxrx.btnListen;
-   sockettxrx.btnConnect;
-  // Connect();
+   connectSocket.Connect(portssetup.serverAddress.contents, samplePort);
 
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  

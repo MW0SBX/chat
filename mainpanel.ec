@@ -123,7 +123,7 @@ class Mainpanel : Window
           chatFile.Puts(c);         
           chatFile.PrintLn("<BR>");
       
-      thissocket.Connect(portssetup.serverAddress.contents, samplePort);
+ 
       {
 
          String string = changename.editBox.contents;
