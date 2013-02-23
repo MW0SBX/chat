@@ -90,6 +90,42 @@ class Mainpanel : Window
    HTMLView htmlview1 { picture1, this, dontHideScroll =true, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 816, top = 56, right = 34, bottom = 413 }, hasVertScroll = true };
    HTMLView htmlview2 { picture1, this, dontHideScroll =true, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 815, top = 354, right = 35, bottom = 95 }, hasVertScroll = true }; 
    HTMLView htmlview  { console,  this, dontHideScroll =true, inactive = true, opacity = 0, visible = true, borderStyle = none, anchor = { left = 0, top = 0, right = 0, bottom = 60 }, hasVertScroll = true };
+   void AddMessage(String name, String msg)
+   {
+       String imgCode = "<img src=\"\">";
+       String c = msg, s;
+       for(smile : smileys)
+       {
+          // Replace the emoticon by HTML image tag
+          while(s = strstr(c, &smile))
+          {
+             String s2 = new char[(s - c) + strlen(smile) + strlen(imgCode) + strlen(s + strlen(&smile)) + 1];
+             memcpy(s2, c, (uint)(s - c));
+             memcpy(s2 + (s-c), imgCode, strlen(imgCode)-2);
+             memcpy(s2 + (s-c) + strlen(imgCode)-2, smile, strlen(smile));
+             memcpy(s2 + (s-c) + strlen(imgCode)-2 + strlen(smile), imgCode + strlen(imgCode)-2, 2);
+             memcpy(s2 + (s-c) + strlen(smile) + strlen(imgCode), s + strlen(&smile), strlen(s + strlen(&smile)));
+             s2[(s-c) + strlen(smile) + strlen(imgCode) + strlen(s + strlen(&smile))] = 0;
+             if(c != msg)
+                delete c;
+             c = s2;
+          }
+       }
+
+       chatFile.Seek(0, end);
+       chatFile.PrintLn("<b>", name, "</b>: ");
+       chatFile.Puts(c);
+       chatFile.PrintLn("<BR>");
+       chatFile.Seek(0,start);
+
+       mainpanel.htmlview.OpenFile(chatFile, null);
+       mainpanel.htmlview.OnUnloadGraphics();   // This seems to be needed right now to properly load bitmaps
+       mainpanel.htmlview.OnLoadGraphics();
+       mainpanel.htmlview.scroll.y = mainpanel.htmlview.scrollArea.h;
+
+       if(c != msg)
+          delete c;
+   }
    Console console
    {
       picture1, this, opacity = 0, editHeight = 56, drawBehind = true, size = { 490, 635 }, position = { 112, 72 }, editTextColor = white, font = { "Comic Sans MS", 10 }; 
@@ -97,72 +133,10 @@ class Mainpanel : Window
       
        bool ProcessCommand(char * command)
        {
-          String imgCode = "<img src=\"\">";
-          String c = command, s;
-          for(smile : smileys)
-          {
-             // Replace the emoticon by HTML image tag
-             while(s = strstr(c, &smile))
-             {                
-                String s2 = new char[(s - c) + strlen(smile) + strlen(imgCode) + strlen(s + strlen(&smile)) + 1];
-                memcpy(s2, c, (uint)(s - c));
-                memcpy(s2 + (s-c), imgCode, strlen(imgCode)-2);
-                memcpy(s2 + (s-c) + strlen(imgCode)-2, smile, strlen(smile));
-                memcpy(s2 + (s-c) + strlen(imgCode)-2 + strlen(smile), imgCode + strlen(imgCode)-2, 2);
-                memcpy(s2 + (s-c) + strlen(smile) + strlen(imgCode), s + strlen(&smile), strlen(s + strlen(&smile)));
-                s2[(s-c) + strlen(smile) + strlen(imgCode) + strlen(s + strlen(&smile))] = 0;
-                if(c != command)
-                  delete c;
-                c = s2;
-             }
-          }
- 
-          chatFile.Seek(0, end);
-          chatFile.Seek(0, end);
-          chatFile.PrintLn("<b>",changename.editBox.contents, "</b>: ");
-          chatFile.Puts(c);         
-          chatFile.PrintLn("<BR>");
-      
- 
-      {
-
-         String string = changename.editBox.contents;
-         int len = strlen(string);
-         int size = sizeof(SamplePacket) + len;
-         SamplePacket * packet = (SamplePacket *)new byte[size];
-         packet->stringLen = len;
-         memcpy(packet->string, string, len+1);
-         (thissocket).Send(packet, size);
-
-      }
-      {
-         String string = (c);
-         int len = strlen(string);
-         int size = sizeof(SamplePacket) + len;
-         SamplePacket * packet = (SamplePacket *)new byte[size];
-         packet->stringLen = len;
-         memcpy(packet->string, string, len+1);
-         (thissocket).Send(packet, size);
-   
-         
-         delete packet; 
-        } 
-          
-          chatFile.Seek(0,start);
-          chatFile.Seek(0,start);
-
-          mainpanel.htmlview.OpenFile(chatFile, null);
-          mainpanel.htmlview.OnUnloadGraphics();   // This seems to be needed right now to properly load bitmaps
-          mainpanel.htmlview.OnLoadGraphics();
-          mainpanel.htmlview.scroll.y = mainpanel.htmlview.scrollArea.h;
-
-           if(c != command)
-           delete c;
-
-         return false;
-
-      }
-
+          thissocket.SendMessage(changename.editBox.contents, command);
+          mainpanel.AddMessage(changename.editBox.contents, command);
+          return false;
+       }
    };
    Label label1 { picture1, this, "Port1(RX)", position = { 642, 120 },font = { "Brush Script Std", 10} };
    Label label2 { picture1, this, "Port2", position = { 642, 140 },font = { "Brush Script Std", 10} };
