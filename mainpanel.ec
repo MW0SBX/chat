@@ -79,6 +79,7 @@ class Mainpanel : Window
    size = { 988, 734 };
    anchor = { horz = -188, vert = -11 };
    moveable = true;  
+   fullRender = true;
 // alphaBlend = true;
 
    bool OnKeyDown(Key key, unichar ch)

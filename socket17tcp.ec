@@ -20,6 +20,18 @@ class SampleService : Service
     }
 }
 
+class TCPSocket : SampleSocket
+{
+   void OnConnect()
+   {
+      mainpanel.picture70.visible = true;
+      if(!thissocket)
+         thissocket = this;
+      else
+         Disconnect(0); // Should not come here, someone is already connected to us so we should not try to connect
+   }
+}
+
 class SampleSocket : Socket
 {
    void SendMessage(String name, String msg)
@@ -42,15 +54,6 @@ class SampleSocket : Socket
          thissocket = null;
    }
 
-   void OnConnect() 
-   {
-      mainpanel.picture70.visible = true;
-      if(!thissocket)
-         thissocket = this;
-      else
-         Disconnect(0); // Should not come here, someone is already connected to us so we should not try to connect
-   }
-
    unsigned int OnReceive(unsigned char * buffer, unsigned int count)
    {
       if(count >= sizeof(SamplePacket))
@@ -62,6 +65,10 @@ class SampleSocket : Socket
             String name = packet->data;
             String msg = packet->data + packet->nameLen+1;
             mainpanel.AddMessage(name, msg);
+
+            if(this == udpHostSocket)
+               // Send back to the one sending us message...
+               udpSendSocket.DatagramConnect(inetAddress, samplePort);
             return size;
          }
       }
@@ -71,4 +78,6 @@ class SampleSocket : Socket
 
 SampleService service { port = samplePort };
 SampleSocket thissocket;
-SampleSocket connectSocket { };
+TCPSocket connectSocket { };
+SampleSocket udpHostSocket { };
+SampleSocket udpSendSocket { };
