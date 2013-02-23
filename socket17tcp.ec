@@ -13,14 +13,19 @@ struct SamplePacket
 class SampleService : Service
 {
 
+    void OnAccept()
+    {
+    //   SampleSocket { this };
+       thissocket = SampleSocket { this };
+    }
 }
 
 class SampleSocket : Socket
 {
-   void OnConnect() 
-   {
-      mainpanel.picture70.visible = true;  
-   }
+ //  void OnConnect() 
+ //  {
+ //     mainpanel.picture70.visible = true;  
+ //  }
 
    unsigned int OnReceive(unsigned char * buffer, unsigned int count)
    {
@@ -120,5 +125,5 @@ class SocketSample : Window
 
 SocketSample sockettxrx {mainpanel};
 SampleService service { port = samplePort };
-SampleSocket thissocket {};
+SampleSocket thissocket;
 

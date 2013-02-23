@@ -15,7 +15,6 @@ class MySocket7 : Socket
 
    unsigned int OnReceive(unsigned char * buffer, unsigned int count)
    {
-
       if(count >= sizeof(SamplePacket7))
       {
          SamplePacket7 * packet = (SamplePacket7 *) buffer;

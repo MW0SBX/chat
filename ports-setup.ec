@@ -20,7 +20,7 @@ import "socket17tcp"
 
 class Portssetup : Window
 {
-   caption = "Ports Setup";
+   caption = "";
    background = black;
    borderStyle = fixed;
    hasClose = true;
@@ -146,7 +146,7 @@ class Portssetup : Window
    service.Start();       //port 40001 
    sockettxrx.btnListen;
    sockettxrx.btnConnect;
-
+  // Connect();
 
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  
