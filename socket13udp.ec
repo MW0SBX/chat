@@ -13,12 +13,8 @@ struct SamplePacket13
 class MySocket13 : Socket
 {
 
-<<<<<<< HEAD
- 
-=======
    unsigned int OnReceive(unsigned char * buffer, unsigned int count)
    {
-
       if(count >= sizeof(SamplePacket13))
       {
          SamplePacket13 * packet = (SamplePacket13 *) buffer;
@@ -36,20 +32,7 @@ class MySocket13 : Socket
 
       return 0;
    }
-/*      bool ()
-      {
-         String string = portssetup.sentString.contents;  //sentString  in portssetup 
-         int len = strlen(string);
-         int size = sizeof(SamplePacket13) + len;
-         SamplePacket13 * packet = (SamplePacket13 *)new byte[size];
-         packet->stringLen = len;
-         memcpy(packet->string, string, len+1);
-         (socket13).Send(packet, size);
 
-         delete packet;
-         return true;
-      }  */
->>>>>>> 749a344b817a69a214c7e9806ccc6ed60d826046
 }
 
 MySocket13 socket13 {};

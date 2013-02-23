@@ -66,20 +66,3 @@ void Send(char * host, char * to, char * from, File file)
    }
    delete socket;
 }
-<<<<<<< HEAD
-
-=======
-/*
-class MyApp : GuiApplication
-{
-   void Main()
-   {
-      File f = FileOpen("http://www.ecere.com/", read);
-      if(f)
-         Send("mail.mailserver.com", "destaddress@destdomain.com", "srcaddress@srcdomain.com", f);
-      delete f;
-     // getch();
-   }   
-}
-*/
->>>>>>> 749a344b817a69a214c7e9806ccc6ed60d826046

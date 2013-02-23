@@ -13,9 +13,6 @@ struct SamplePacket7
 class MySocket7 : Socket
 {
 
-<<<<<<< HEAD
- 
-=======
    unsigned int OnReceive(unsigned char * buffer, unsigned int count)
    {
 
@@ -36,20 +33,7 @@ class MySocket7 : Socket
 
       return 0;
    }
-      /*bool ()
-      {
-         String string = portssetup.sentString.contents;  //sentString  in portssetup 
-         int len = strlen(string);
-         int size = sizeof(SamplePacket7) + len;
-         SamplePacket7 * packet = (SamplePacket7 *)new byte[size];
-         packet->stringLen = len;
-         memcpy(packet->string, string, len+1);
-         (socket7).Send(packet, size);
-
-         delete packet;
-         return true;
-      }  */
->>>>>>> 749a344b817a69a214c7e9806ccc6ed60d826046
+ 
 }
 
 MySocket7 socket7 {};
