@@ -12,34 +12,14 @@ struct SamplePacket
 
 class SampleService : Service
 {
-   void OnAccept()
-   {
 
-      if(!servingSocket)
-      {
-         servingSocket = SampleSocket { this };
-         sockettxrx.UpdateButtonStates();
-      }
-   }
 }
 
 class SampleSocket : Socket
 {
-   void OnConnect() //DatagramConnect() 
+   void OnConnect() 
    {
-      sockettxrx.UpdateButtonStates();
       mainpanel.picture70.visible = true;  
-   }
-
-   void OnDisconnect(int code)
-   {
-
-      if(connectedSocket == this)
-         connectedSocket = null;
-      else if(servingSocket == this)
-         servingSocket = null;
-
-      sockettxrx.UpdateButtonStates();      
    }
 
    unsigned int OnReceive(unsigned char * buffer, unsigned int count)
@@ -52,8 +32,6 @@ class SampleSocket : Socket
 
          if(count >= size)
          {
-
-            //portssetup.recvString.contents = packet->string; //recvString in portssetup 
             chatFile.Puts (packet->string);
              
             return size;
@@ -64,7 +42,6 @@ class SampleSocket : Socket
       return 0;
    }
 }
-
 
 class SocketSample : Window
 {
@@ -79,10 +56,9 @@ class SocketSample : Window
 
    void UpdateButtonStates()
    {
-      bool connected = (connectedSocket && connectedSocket.connected) || (servingSocket && servingSocket.connected);
+      bool connected = (thissocket.connected);
 
       btnSend.disabled = !connected;
-      btnConnect.disabled = connectedSocket != null;
       btnListen.disabled = listening;
    }
 
@@ -98,7 +74,7 @@ class SocketSample : Window
          SamplePacket * packet = (SamplePacket *)new byte[size];
          packet->stringLen = len;
          memcpy(packet->string, string, len+1);
-         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);
+         (thissocket).Send(packet, size);
 
          delete packet;
          return true;
@@ -127,8 +103,7 @@ class SocketSample : Window
       bool NotifyClicked(Button button, int x, int y, Modifiers mods)
       {
          btnConnect.disabled = true;
-         connectedSocket = SampleSocket { };
-         connectedSocket.Connect(portssetup.serverAddress.contents, samplePort); //server address in portssetup
+         thissocket.Connect(portssetup.serverAddress.contents, samplePort); //server address in portssetup
 
          return true;
       }
@@ -136,8 +111,8 @@ class SocketSample : Window
 
    void OnDestroy()
    {
-      if(connectedSocket)
-         connectedSocket.Disconnect(0);
+      if(thissocket)
+         thissocket.Disconnect(0);
       service.Stop();
    }
 }
@@ -145,4 +120,5 @@ class SocketSample : Window
 
 SocketSample sockettxrx {mainpanel};
 SampleService service { port = samplePort };
-SampleSocket connectedSocket, servingSocket;
+SampleSocket thissocket {};
+

@@ -37,7 +37,6 @@ import "sha256"
 import "CheckListBox"  
 import "passwordBox"
 
-
 TempFile chatFile { };
 
 Map<String, String> smileys
@@ -64,7 +63,6 @@ Map<String, String> smileys
    { ":(", ":smiley2.png" },
    { ":)", ":smiley1.png" }
 ] };
-
 
  class MyApp : GuiApplication
  {
@@ -125,7 +123,7 @@ class Mainpanel : Window
           chatFile.Puts(c);         
           chatFile.PrintLn("<BR>");
       
-      connectedSocket.Connect("localhost", samplePort);
+      thissocket.Connect("localhost", samplePort);
       {
 
          String string = changename.editBox.contents;
@@ -134,7 +132,8 @@ class Mainpanel : Window
          SamplePacket * packet = (SamplePacket *)new byte[size];
          packet->stringLen = len;
          memcpy(packet->string, string, len+1);
-         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);
+         (thissocket).Send(packet, size);
+
       }
       {
          String string = (c);
@@ -143,7 +142,8 @@ class Mainpanel : Window
          SamplePacket * packet = (SamplePacket *)new byte[size];
          packet->stringLen = len;
          memcpy(packet->string, string, len+1);
-         (connectedSocket ? connectedSocket : servingSocket).Send(packet, size);   
+         (thissocket).Send(packet, size);
+   
          
          delete packet; 
         } 
@@ -164,34 +164,33 @@ class Mainpanel : Window
       }
 
    };
-   Label label1 { picture1, this, "Port1(RX)", position = { 642, 120 } };
-   Label label2 { picture1, this, "Port2", position = { 642, 140 } };
-   Label label3 { picture1, this, "Port3", position = { 642, 160 } };
-   Label label4 { picture1, this, "Port4", position = { 642, 180 } };
-   Label label5 { picture1, this, "Port5", position = { 642, 200 } };
-   Label label6 { picture1, this, "Port6", position = { 642, 220 } };
-   Label label7 { picture1, this, "Port7", position = { 642, 240 } };
-   Label label8 { picture1, this, "Port8", position = { 642, 260 } };
-   Label label9 { picture1, this, "Port9(TX)", position = { 726, 120 } };
-   Label labe20 { picture1, this, "Port10", position = { 726, 140 } };
-   Label labe21 { picture1, this, "Port11", position = { 726, 160 } };
-   Label labe22 { picture1, this, "Port12", position = { 726, 180 } };
-   Label labe23 { picture1, this, "Port13", position = { 726, 200 } };
-   Label labe24 { picture1, this, "Port14", position = { 726, 220 } };
-   Label labe25 { picture1, this, "Port15", position = { 726, 240 } };
-   Label labe26 { picture1, this, "Port16", position = { 726, 260 } };
-   Label labe27 { picture1, this, "UDP PORTS", position = { 622, 100 } };
-   Label labe28 { picture1, this, "TCP PORTS", position = { 622, 280 } };
-   Label labe29 { picture1, this, "Port1", position = { 638, 300 } };
-   Label labe30 { picture1, this, "Port2", position = { 722, 300 } };
-   Label labe31 { picture1, this, "TCP SERVER", position = { 642, 320 } };
+   Label label1 { picture1, this, "Port1(RX)", position = { 642, 120 },font = { "Brush Script Std", 10} };
+   Label label2 { picture1, this, "Port2", position = { 642, 140 },font = { "Brush Script Std", 10} };
+   Label label3 { picture1, this, "Port3", position = { 642, 160 },font = { "Brush Script Std", 10} };
+   Label label4 { picture1, this, "Port4", position = { 642, 180 },font = { "Brush Script Std", 10} };
+   Label label5 { picture1, this, "Port5", position = { 642, 200 },font = { "Brush Script Std", 10} };
+   Label label6 { picture1, this, "Port6", position = { 642, 220 },font = { "Brush Script Std", 10} };
+   Label label7 { picture1, this, "Port7", position = { 642, 240 },font = { "Brush Script Std", 10} };
+   Label label8 { picture1, this, "Port8", position = { 642, 260 },font = { "Brush Script Std", 10} };
+   Label label9 { picture1, this, "Port9(TX)", position = { 726, 120 },font = { "Brush Script Std", 10} };
+   Label labe20 { picture1, this, "Port10", position = { 726, 140 },font = { "Brush Script Std", 10} };
+   Label labe21 { picture1, this, "Port11", position = { 726, 160 },font = { "Brush Script Std", 10} };
+   Label labe22 { picture1, this, "Port12", position = { 726, 180 },font = { "Brush Script Std", 10} };
+   Label labe23 { picture1, this, "Port13", position = { 726, 200 },font = { "Brush Script Std", 10} };
+   Label labe24 { picture1, this, "Port14", position = { 726, 220 },font = { "Brush Script Std", 10} };
+   Label labe25 { picture1, this, "Port15", position = { 726, 240 },font = { "Brush Script Std", 10} };
+   Label labe26 { picture1, this, "Port16", position = { 726, 260 },font = { "Brush Script Std", 10} };
+   Label labe27 { picture1, this, "UDP PORTS", position = { 622, 100 },font = { "Brush Script Std", 10} };
+   Label labe28 { picture1, this, "TCP PORTS", position = { 622, 280 },font = { "Brush Script Std", 10} };
+   Label labe29 { picture1, this, "Port1", position = { 638, 300 },font = { "Brush Script Std", 10} };
+   Label labe30 { picture1, this, "Port2", position = { 722, 300 },font = { "Brush Script Std", 10} };
+   Label labe31 { picture1, this, "TCP SERVER", position = { 642, 320 },font = { "Brush Script Std", 10} };
    Picture picture70 { picture1, this, "picture70", size = { 8, 8 }, position = { 622, 300 }, visible = false, image = { ":dot.png" } }; //port1
    Picture picture69 { picture1, this, "picture69", size = { 8, 8 }, position = { 706, 300 }, visible = false, image = { ":dot.png" } }; //port2
    Picture picture68 { picture1, this, "picture68", size = { 8, 8 }, position = { 622, 320 }, visible = false, image = { ":dot.png" } }; //tcp server
    Picture picture67 { picture1, this, "picture67", size = { 8, 8 }, position = { 622, 300 }, visible = true, image = { ":dotr.png" } }; //port1 tcp
    Picture picture66 { picture1, this, "picture66", size = { 8, 8 }, position = { 706, 300 }, visible = true, image = { ":dotr.png" } }; //port2 tcp
    Picture picture65 { picture1, this, "picture65", size = { 8, 8 }, position = { 622, 320 }, visible = true, image = { ":dotr.png" } }; //tcp server
-
    Picture picture64 { picture1, this, "picture64", size = { 8, 8 }, position = { 706, 260 }, visible = false, image = { ":dot.png" } };//port16
    Picture picture63 { picture1, this, "picture63", size = { 8, 8 }, position = { 706, 240 }, visible = false, image = { ":dot.png" } };
    Picture picture62 { picture1, this, "picture62", size = { 8, 8 }, position = { 706, 220 }, visible = false, image = { ":dot.png" } };
@@ -236,8 +235,6 @@ class Mainpanel : Window
    Picture picture23 { picture1, this, "send_over", position = { 695, 44  },  visible = false,  image = { ":send_over.gif" } };
    Picture picture22 { picture1, this, "file_over", position = { 750, 44  },  visible = false,  image = { ":file_over.gif" } };
    Picture picture21 { picture1, this, "clear_over", position = { 615, 669 },  visible = false,  image = { ":clear_over.gif" } };
-
-   
 
    bool SmileyClicked(Button button, int x, int y, Modifiers mods)
    {

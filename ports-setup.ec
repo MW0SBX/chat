@@ -144,7 +144,10 @@ class Portssetup : Window
    
   
    service.Start();       //port 40001 
-   
+   sockettxrx.btnListen;
+   sockettxrx.btnConnect;
+
+
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  
    portssetup.picture20.visible = true;
@@ -206,18 +209,18 @@ class Portssetup : Window
    Picture picture20 { this, caption = "picture20", position = { 19, 37 }, visible = false, image = { ":p2p-connect.png" } };
    Picture picture21 { this, caption = "picture21", position = { 31, 299  }, visible = false, image = { ":save-settings.png" } };
    Picture picture22 { this, caption = "picture22", position = { 334, 104  }, visible = false, image = { ":reset-over.png" } };
-   Label label1 { this, caption = "Note! do not change this unless you want to make unique chat clients", foreground = white, background = black, position = { 10, 10  } };
-   Label label2 { this, caption = "Recieve String", foreground = white, background = black, position = { 20, 235 } };
-   Label label3 { this, caption = "TCP Ports", foreground = white, background = black, position = { 125, 140 } };
-   Label label4 { this, caption = "Recieve (RX)", foreground = white, background = black, position = { 125, 160 } };
-   Label label5 { this, caption = "Transmit (TX)", background = black, foreground = white, position = { 125, 210 } };
-   Label label6 { this, caption = "UDP Ports", foreground = white, background = black, position = { 220, 140 } };
-   Label label7 { this, caption = "Recieve (RX)", foreground = white, background = black, position = { 220, 160 } };
-   Label label8 { this, caption = "Transmit (TX)", foreground = white, background = black, position = { 310, 160 } };
-   Label label9 { this, caption = "Send String", foreground = white, background = black, position = { 20, 185 } };
-   Label lblServerAddress { this, background = black, foreground = white, position = { 125, 90 }, labeledWindow = serverAddress };
+   Label label1 { this, caption = "Note! do not change this unless you want to make unique chat clients", foreground = white, background = black, position = { 10, 10  },font = { "Brush Script Std", 10} };
+   Label label2 { this, caption = "Recieve String", foreground = white, background = black, position = { 20, 235 },font = { "Brush Script Std", 10} };
+   Label label3 { this, caption = "TCP Ports", foreground = white, background = black, position = { 125, 140 },font = { "Brush Script Std", 10} };
+   Label label4 { this, caption = "Recieve (RX)", foreground = white, background = black, position = { 125, 160 },font = { "Brush Script Std", 10} };
+   Label label5 { this, caption = "Transmit (TX)", background = black, foreground = white, position = { 125, 210 },font = { "Brush Script Std", 10} };
+   Label label6 { this, caption = "UDP Ports", foreground = white, background = black, position = { 220, 140 },font = { "Brush Script Std", 10} };
+   Label label7 { this, caption = "Recieve (RX)", foreground = white, background = black, position = { 220, 160 },font = { "Brush Script Std", 10} };
+   Label label8 { this, caption = "Transmit (TX)", foreground = white, background = black, position = { 310, 160 },font = { "Brush Script Std", 10} };
+   Label label9 { this, caption = "Send String", foreground = white, background = black, position = { 20, 185 },font = { "Brush Script Std", 10} };
+   Label lblServerAddress { this, background = black, foreground = white, position = { 125, 90 }, labeledWindow = serverAddress, font = { "Brush Script Std", 10} };
    EditBox serverAddress { this, text = "Connect to", background = white, foreground = green, size = { 120, 20 }, position = { 125, 105 }, contents = "localhost", selectionColor = red };
-   Label lblServerPort { this, background = black, foreground = white, position = { 260, 90 }, labeledWindow = serverPort };
+   Label lblServerPort { this, background = black, foreground = white, position = { 260, 90 }, labeledWindow = serverPort, font = { "Brush Script Std", 10} };
    EditBox serverPort { this, text = "My Server port", background = white, foreground = green, size = { 60, 20 }, position = { 260, 105 }, contents = "40003", selectionColor = red };
    EditBox editBox1  { this, caption = "editBox1", background = white, foreground = green,  contents = "40001", position = { 150, 175 }, size = { 50,20 }, selectionColor = red };
    EditBox editBox2  { this, caption = "editBox2", background = white, foreground = green,  contents = "40002", position = { 150, 225 }, size = { 50,20 }, selectionColor = red };
