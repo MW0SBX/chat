@@ -105,6 +105,7 @@ class Portssetup : Window
          
    File f = FileOpen(":dot.html", read); mainpanel.htmlview1.OpenFile(f, null); 
  
+   /*
    socket1.DatagramHost(atoi(portssetup.editBox5.contents)); 
    socket2.DatagramHost(atoi(portssetup.editBox6.contents)); 
    socket3.DatagramHost(atoi(portssetup.editBox7.contents)); 
@@ -132,6 +133,7 @@ class Portssetup : Window
    socket6.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox18.contents) ); //50006 connect to 60006
    socket7.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox19.contents) ); //50007 connect to 60007
    socket8.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox20.contents) ); //50008 connect to 60008  
+   */
 
 /* socket9.DatagramConnect(portssetup.serverAddress.contents,  atoi(portssetup.editBox5.contents) );  //60001 connect to 50001
    socket10.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox6.contents) );  //60002 connect to 50002
@@ -142,9 +144,16 @@ class Portssetup : Window
    socket15.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox11.contents) ); //60007 connect to 50007
    socket16.DatagramConnect(portssetup.serverAddress.contents, atoi(portssetup.editBox12.contents) ); //60008 connect to 50008 */ 
    
-  
+   // UDP
+   udpHostSocket.DatagramHost(samplePort);
+   udpSendSocket.DatagramConnect(portssetup.serverAddress.contents, samplePort);
+   thissocket = udpSendSocket;
+
+   // TCP/IP
+   /*
    service.Start();       //port 40001 
    connectSocket.Connect(portssetup.serverAddress.contents, samplePort);
+   */
 
    mainpanel.picture28.visible = true;
    mainpanel.picture29.visible = false;  
