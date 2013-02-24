@@ -1,4 +1,5 @@
 public import "ecere"
+import "console"
 
 #define BORDER       4 //4
 #define TOP          3
@@ -109,7 +110,7 @@ static void Dummy()
    w.OnResizing(null, null);
 }
 
-static void Button::ThumbOnRedraw(Surface surface)
+static void Button::ThumbOnRedrawFlippedOrNot(Surface surface, bool flip)
 {
    int offset = (buttonState == down) ? this.offset : 0;
    BitmapResource left = bmpThumbUp;
@@ -122,15 +123,24 @@ static void Button::ThumbOnRedraw(Surface surface)
    int sideH = 10; // * sizeW / 14;
    int middleH = size.h - 2 * (sideH + y);
    
-   surface.Stretch(left.bitmap, x, y, 0,0, w, sideH, left.bitmap.width, left.bitmap.height);
+   surface.Stretch(left.bitmap, x, y, 0,0, flip ? -w : w, sideH, left.bitmap.width, left.bitmap.height);
    surface.HTile(middle.bitmap, x, y + sideH, w, middleH);
-   surface.Stretch(right.bitmap, x, y + sideH + middleH, 0,0, w, sideH, right.bitmap.width, right.bitmap.height);
+   surface.Stretch(right.bitmap, x, y + sideH + middleH, 0,0, flip ? -w : w, sideH, right.bitmap.width, right.bitmap.height);
    
    /*
    surface.Filter(left.bitmap, x, y, 0,0, w, sideH, left.bitmap.width, left.bitmap.height);
    surface.FilterVTile(middle.bitmap, x, y + sideH, w, middleH);
    surface.Filter(right.bitmap, x, y + sideH + middleH, 0,0, w, sideH, right.bitmap.width, right.bitmap.height);
    */
+}
+
+static void Button::ThumbOnRedraw(Surface surface)
+{
+   ThumbOnRedrawFlippedOrNot(this, surface, false);
+}
+static void Button::FlippedThumbOnRedraw(Surface surface)
+{
+   ThumbOnRedrawFlippedOrNot(this, surface, true);
 }
    
 static bool Button::ThumbIsInside(int x, int y)
@@ -513,7 +523,8 @@ public class MySkin_Window : Window
          *y += 1;
       }
 
-      if(hasVertScroll) *x += SB_WIDTH;
+      if(hasVertScroll && parent._class != class(Console))
+         x += SB_WIDTH;
 
       // Reduce client area
       *cw = *w - aw;
@@ -803,7 +814,10 @@ public class MySkin_Window : Window
       }
       if(sbv)
       {
-         sbv.anchor = { left = -SB_WIDTH, top = 0, bottom = 0 };
+         if(parent._class == class(Console))
+            sbv.thumb.OnRedraw = FlippedThumbOnRedraw;
+         else
+            sbv.anchor = { left = -SB_WIDTH, top = 0, bottom = 0 };
       }
    }
 
