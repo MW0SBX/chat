@@ -110,6 +110,19 @@ static void Dummy()
    w.OnResizing(null, null);
 }
 
+// This is to force the thumb to stay visible
+void (*DefaultScrollNotification)(Window w, ScrollBar scrollBar, ScrollBarAction action, int position, Key key);
+
+static void Window::ScrollNotification(ScrollBar scrollBar, ScrollBarAction action, int position, Key key)
+{
+   if(!scrollBar.thumb.visible)
+   {
+      scrollBar.thumb.visible = true;
+      scrollBar.thumb.anchor = { 0,0,0,0 };
+   }
+   DefaultScrollNotification(this, scrollBar, action, position, key);
+}
+
 static void Button::ThumbOnRedrawFlippedOrNot(Surface surface, bool flip)
 {
    int offset = (buttonState == down) ? this.offset : 0;
@@ -814,6 +827,9 @@ public class MySkin_Window : Window
       }
       if(sbv)
       {
+         if(!DefaultScrollNotification)
+            DefaultScrollNotification = sbv.NotifyScrolling;
+         sbv.NotifyScrolling = ScrollNotification;
          if(parent._class == class(Console))
             sbv.thumb.OnRedraw = FlippedThumbOnRedraw;
          else
