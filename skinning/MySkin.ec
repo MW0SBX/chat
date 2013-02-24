@@ -513,6 +513,8 @@ public class MySkin_Window : Window
          *y += 1;
       }
 
+      if(hasVertScroll) *x += SB_WIDTH;
+
       // Reduce client area
       *cw = *w - aw;
       *ch = *h - ah;
@@ -798,6 +800,10 @@ public class MySkin_Window : Window
          closeButton.bevel = true;
          closeButton.bitmap = { skinBitmaps[close] };
          closeButton.visible = true;
+      }
+      if(sbv)
+      {
+         sbv.anchor = { left = -SB_WIDTH, top = 0, bottom = 0 };
       }
    }
 
