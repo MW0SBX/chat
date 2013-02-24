@@ -238,7 +238,7 @@ class Mainpanel : Window
    ProgressBar progressBar1  { picture1, this, "progressBar1", inactive = true, opacity = 0, borderStyle = contour, size = { 585, 23 }, position = { 104, 42 } };
    Picture picture1
    {
-      this, caption = "picture1", inactive = false, position = {  }, image = { ":chat-window22.pcx", alphaBlend = true };
+      this, anchor = { 0,0,0,0 },caption = "picture1", inactive = false, image = { ":chat-window22.pcx", alphaBlend = true };
 
       bool OnLeftButtonDown(int x, int y, Modifiers mods)
       {
